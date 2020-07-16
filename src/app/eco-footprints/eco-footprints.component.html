@@ -1,19 +1,11 @@
-<div *ngIf="selectedFootprint">
-  <h2>{{selectedFootprint.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{selectedFootprint.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="selectedFootprint.name" placeholder="name"/>
-    </label>
-  </div>
-</div>
-
 <ul class="footprints-list">
   <li
     *ngFor="let footprint of footprints"
     (click)="onSelect(footprint)"
     class="footprints-list-item"
-    [ngClass]="{'footprints-list-item__checked' : !!selectedFootprint && selectedFootprint.id === footprint.id}">
+    [class.selected]="footprint === selectedFootprint">
     <span class="badge">{{footprint.id}}</span> {{footprint.name}}
   </li>
 </ul>
+
+<app-footprint-detail [footprint]="selectedFootprint"></app-footprint-detail>

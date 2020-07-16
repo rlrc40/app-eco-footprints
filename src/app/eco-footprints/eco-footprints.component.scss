@@ -14,7 +14,7 @@
         grid-template-columns: 50px auto;
         padding: 0px 20px 0px 0px;
         cursor: pointer;
-        &:hover, &__checked {
+        &:hover, .selected {
             background-color: #a06a4c;
         }
         .badge {
@@ -27,5 +27,8 @@
             background-color: #63371E;
             border-radius: 10px;
         }
+    }
+    .footprints-list-item:hover, .footprints-list-item.selected {
+        background-color: #a06a4c;
     }
 }

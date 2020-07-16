@@ -1,0 +1,11 @@
+<div *ngIf="footprint">
+
+  <h2>{{footprint.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{footprint.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="footprint.name" placeholder="name"/>
+    </label>
+  </div>
+
+</div>

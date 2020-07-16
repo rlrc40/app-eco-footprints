@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FOOTPRINTS } from '../mock-footprints';
 
 import { Footprint } from '../footprint';
+import { servicesVersion } from 'typescript';
 
 @Component({
   selector: 'app-eco-footprints',
@@ -15,11 +16,11 @@ export class EcoFootprintsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onSelect(footprint: Footprint): void {
     this.selectedFootprint = footprint;
   }
+
 
 }
