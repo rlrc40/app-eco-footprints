@@ -2,7 +2,7 @@
     list-style-type: none;
     margin: 0px;
     padding: 0px;
-    .footprints-list-item {
+    .footprints-list-item a {
         height: 40px;
         background-color: #a06a4c8f;
         color: white;
@@ -16,6 +16,9 @@
         cursor: pointer;
         &:hover, .selected {
             background-color: #a06a4c;
+        }
+        a {
+          text-decoration: none;
         }
         .badge {
             color: white;

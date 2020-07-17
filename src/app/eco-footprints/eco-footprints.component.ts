@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FootprintService } from '../footprint.service';
-import { MessageService } from '../message.service';
 
 import { Footprint } from '../footprint';
 
@@ -12,20 +11,13 @@ import { Footprint } from '../footprint';
 })
 export class EcoFootprintsComponent implements OnInit {
   footprints: Footprint[];
-  selectedFootprint: Footprint;
 
   constructor(
     private footprintService: FootprintService,
-    private messageService: MessageService
   ) {}
 
   ngOnInit() {
     this.getFootprints();
-  }
-
-  onSelect(footprint: Footprint): void {
-    this.selectedFootprint = footprint;
-    this.messageService.add(`EcoFootprintsComponent: Selected footprint id=${footprint.id}`);
   }
 
   getFootprints(): void {

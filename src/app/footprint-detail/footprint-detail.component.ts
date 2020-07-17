@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
+import { FootprintService }  from '../footprint.service';
 import { Footprint } from '../footprint';
 
 @Component({
@@ -12,9 +15,24 @@ import { Footprint } from '../footprint';
 export class FootprintDetailComponent implements OnInit {
   @Input() footprint: Footprint;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private footprintService: FootprintService,
+    private location: Location
+  ) { }
 
   ngOnInit() {
+    this.getFootprint();
+  }
+
+  getFootprint(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.footprintService.getFootprint(id)
+      .subscribe(footprint => this.footprint = footprint);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

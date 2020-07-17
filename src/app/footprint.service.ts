@@ -18,4 +18,10 @@ export class FootprintService {
     return of(FOOTPRINTS);
   }
 
+  getFootprint(id: number): Observable<Footprint> {
+    // TODO: send the message _after_ fetching the footprint
+    this.messageService.add(`FootprintService: fetched footprint id=${id}`);
+    return of(FOOTPRINTS.find(footprint => footprint.id === id));
+  }
+
 }

@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { EcoFootprintsComponent } from './eco-footprints/eco-footprints.component';
 import { FootprintDetailComponent } from './footprint-detail/footprint-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       EcoFootprintsComponent,
       FootprintDetailComponent,
-      MessagesComponent
+      MessagesComponent,
+      DashboardComponent
    ],
    imports: [
       BrowserModule,
-      FormsModule
+      FormsModule,
+      AppRoutingModule
    ],
    providers: [],
    bootstrap: [

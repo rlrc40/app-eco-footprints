@@ -1,0 +1,8 @@
+<h3>Last footprints</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let footprint of footprints" class="col-1-4" routerLink="/detail/{{footprint.id}}">
+    <div class="module footprint">
+      <h4>{{footprint.name}}</h4>
+    </div>
+  </a>
+</div>

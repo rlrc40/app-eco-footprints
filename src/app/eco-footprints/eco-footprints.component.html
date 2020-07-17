@@ -1,11 +1,10 @@
 <ul class="footprints-list">
-  <li
-    *ngFor="let footprint of footprints"
+  <li *ngFor="let footprint of footprints"
     (click)="onSelect(footprint)"
     class="footprints-list-item"
     [class.selected]="footprint === selectedFootprint">
-    <span class="badge">{{footprint.id}}</span> {{footprint.name}}
+    <a routerLink="/detail/{{footprint.id}}">
+      <span class="badge">{{footprint.id}}</span> {{footprint.name}}
+    </a>
   </li>
 </ul>
-
-<app-footprint-detail [footprint]="selectedFootprint"></app-footprint-detail>
