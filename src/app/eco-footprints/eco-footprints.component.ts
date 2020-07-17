@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FOOTPRINTS } from '../mock-footprints';
+import { FootprintService } from '../footprint.service';
+import { MessageService } from '../message.service';
 
 import { Footprint } from '../footprint';
-import { servicesVersion } from 'typescript';
 
 @Component({
   selector: 'app-eco-footprints',
@@ -11,15 +11,26 @@ import { servicesVersion } from 'typescript';
   styleUrls: ['./eco-footprints.component.scss']
 })
 export class EcoFootprintsComponent implements OnInit {
-  footprints = FOOTPRINTS;
+  footprints: Footprint[];
   selectedFootprint: Footprint;
 
-  constructor() { }
+  constructor(
+    private footprintService: FootprintService,
+    private messageService: MessageService
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getFootprints();
+  }
 
   onSelect(footprint: Footprint): void {
     this.selectedFootprint = footprint;
+    this.messageService.add(`EcoFootprintsComponent: Selected footprint id=${footprint.id}`);
+  }
+
+  getFootprints(): void {
+    this.footprintService.getFootprints()
+        .subscribe(footprints => this.footprints = footprints);
   }
 
 
