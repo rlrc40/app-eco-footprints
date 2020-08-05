@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { EcoFootprintFormComponent } from './eco-footprint-form/eco-footprint-form.component';
+import { EcoFootprintListComponent } from './eco-footprint-list/eco-footprint-list.component';
 
 const routes: Routes = [
   { path: 'new', component: EcoFootprintFormComponent },
-  { path: '', redirectTo: '/new', pathMatch: 'full' },
+  { path: 'list', component: EcoFootprintListComponent },
 ];
 
 @NgModule({

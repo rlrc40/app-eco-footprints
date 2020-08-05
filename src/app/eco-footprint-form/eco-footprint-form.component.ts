@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
+
 import { EcoActionService } from '../service/EcoAction.service';
 import { EcoFootprintService } from '../service/EcoFootprint.service';
 import { BehaviorSubject } from 'rxjs';
@@ -17,6 +19,7 @@ export class EcoFootprintFormComponent implements OnInit {
   ecoActionsGroup: FormGroup;
 
   constructor(
+    private router: Router,
     private _formBuilder: FormBuilder,
     private ecoActionService: EcoActionService,
     private ecoFootprintService: EcoFootprintService,
@@ -59,7 +62,10 @@ export class EcoFootprintFormComponent implements OnInit {
         ...this.firstFormGroup.value,
         ...this.ecoActionsGroup.value,
       };
-      this.ecoFootprintService.save(newEcoFootprint).subscribe(result => console.log(result));
+      this.ecoFootprintService.save(newEcoFootprint).subscribe(result => {
+        this.router.navigate(['/list', { }]);
+        console.log(result)
+      });
   }
 
 }
