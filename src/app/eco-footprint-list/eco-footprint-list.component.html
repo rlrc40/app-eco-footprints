@@ -1,26 +1,28 @@
 <div class="eco-footprint-list">
-  <div *ngFor="let ecoFootprint of ecoFootprints" class="eco-footprint-list-item">
-    <button class="eco-footprint-list-item-delete" mat-icon-button color="warn" aria-label="Delete eco footprint" (click)="deleteEcoFootprint(ecoFootprint.id)">
-      <mat-icon>delete</mat-icon>
-    </button>
-    <mat-list>
-        <div *ngIf="ecoFootprint.firstName">
-          <strong>Name: </strong>
-          <mat-list-item> {{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}</mat-list-item>
-        </div>
-        <div *ngIf="ecoFootprint.description">
-          <strong>Description: </strong>
-          <mat-list-item> {{ ecoFootprint.description }}</mat-list-item>
-        </div>
-        <div *ngIf="ecoFootprint.ecoActions && ecoFootprint.ecoActions.length > 0">
-          <strong>ECO Actions: </strong>
-          <mat-list-item *ngFor="let ecoAction of ecoFootprint.ecoActions">
-            <span *ngIf="ecoAction"> {{ ecoAction.description }} </span>
-          </mat-list-item>
-        </div>
-      </mat-list>
-      <br/>
-      <br/>
+  <div *ngIf="!isLoading">
+    <div *ngFor="let ecoFootprint of ecoFootprints" class="eco-footprint-list-item">
+      <button class="eco-footprint-list-item-delete" mat-icon-button color="warn" aria-label="Delete eco footprint" (click)="deleteEcoFootprint(ecoFootprint.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <mat-list>
+          <div *ngIf="ecoFootprint.firstName">
+            <strong>Name: </strong>
+            <mat-list-item> {{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}</mat-list-item>
+          </div>
+          <div *ngIf="ecoFootprint.description">
+            <strong>Description: </strong>
+            <mat-list-item> {{ ecoFootprint.description }}</mat-list-item>
+          </div>
+          <div *ngIf="ecoFootprint.ecoActions && ecoFootprint.ecoActions.length > 0">
+            <strong>ECO Actions: </strong>
+            <mat-list-item *ngFor="let ecoAction of ecoFootprint.ecoActions">
+              <span *ngIf="ecoAction"> {{ ecoAction.description }} </span>
+            </mat-list-item>
+          </div>
+        </mat-list>
+        <br/>
+        <br/>
+    </div>
   </div>
-  <mat-spinner [diameter]="50" *ngIf="ecoFootprints.length === 0"></mat-spinner>
+<mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
 </div>

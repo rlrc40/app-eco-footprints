@@ -10,12 +10,18 @@ import { EcoFootprint } from '../models/EcoFootprint';
 })
 export class EcoFootprintListComponent implements OnInit {
   ecoFootprints: EcoFootprint[] = [];
+  isLoading: Boolean = true;
 
   constructor(private ecoFootprintService: EcoFootprintService) { }
 
   ngOnInit() {
+    console.log(this.isLoading)
+
     setTimeout(() => {
       this.getEcoFootprints();
+      this.isLoading = false;
+    console.log(this.isLoading)
+
     }, 1000);
   }
 
@@ -25,8 +31,17 @@ export class EcoFootprintListComponent implements OnInit {
   }
 
   deleteEcoFootprint(ecoFootprintId: string): void {
+    this.isLoading = true;
+    console.log(this.isLoading)
     this.ecoFootprintService.delete(ecoFootprintId)
-      .subscribe(this.getEcoFootprints.bind(this));
+      .subscribe(() => {
+        this.getEcoFootprints.bind(this)
+        setTimeout(() => {
+          this.isLoading = false;
+          console.log(this.isLoading)
+
+        }, 1000);
+      });
 
   }
 
