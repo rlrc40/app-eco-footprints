@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -12,6 +12,7 @@ import { EcoAction } from '../models/EcoAction';
 export class EcoActionService {
 
   private ecoActionUrl = `${window.location.protocol}//${window.location.hostname}:4200/eco-action`;  // URL to web api
+  private _ecoActionsField = new BehaviorSubject<EcoAction[]>([]);
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +20,15 @@ export class EcoActionService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
+
+  getEcoActionsField(): Observable<any> {
+    return this._ecoActionsField.asObservable();
+  }
+
+  setEcoActionsField(ecoActions: EcoAction[]) {
+    this._ecoActionsField.next(ecoActions);
+  }
 
   /** GET: ecoActions on the server */
   getEcoActions(): Observable<EcoAction[]> {

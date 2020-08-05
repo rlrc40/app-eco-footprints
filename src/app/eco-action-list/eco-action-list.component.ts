@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { MatListOption } from '@angular/material/list'
 
 import { EcoAction } from '../models/EcoAction';
 import { EcoActionService } from '../service/EcoAction.service';
@@ -22,24 +23,23 @@ export class EcoActionListComponent implements OnInit {
       .subscribe(ecoActions => this.ecoActions = ecoActions);
   }
 
-  getSumCo2e(tabs): Number {
+  getSumCo2e(ecoActions): Number {
     const getSum = (total, value) => total + value;
 
-    let totalCo2e = 0;
-    for (let i = 0; i < tabs.length; i++) {
-      const tab = tabs[i].selectedOptions.selected.map( action => action.value.co2e );
-      totalCo2e += tab.length && tab.reduce(getSum) || 0;
-    }
-    return totalCo2e;
+    const list = ecoActions.selectedOptions.selected;
+    return list.length && list.map( action => action.value.co2e ).reduce(getSum) || 0;
   }
 
-  getNumberOfSelectedActions(tabs): Number {
-    let length = 0;
-    for (let i = 0; i < tabs.length; i++) {
-      const tab = tabs[i].selectedOptions.selected;
-      length += tab.length;
-    }
-    return length;
+  getNumberOfSelectedActions(ecoActions): Number {
+    return ecoActions.selectedOptions.selected.length;
+  }
+
+  getWithBar(co2e): Number {
+    return (100 - (co2e * 100) / 7.4);
+  }
+
+  onChange(key: string, options: MatListOption[]): void {
+    this.ecoActionService.setEcoActionsField(options.map(o => o.value))
   }
 
 }

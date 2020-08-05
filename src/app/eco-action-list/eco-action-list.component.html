@@ -1,38 +1,37 @@
 <p>
-  Options selected: {{ getNumberOfSelectedActions([ transport, feeding, energy ]) }}
+  Options selected: {{ getNumberOfSelectedActions(selectedEcoActions) }}
 </p>
 <p>
-  Total co2e: {{ getSumCo2e( [ transport, feeding, energy ] )  | number : '1.1-2'}}
+  Total co2e: {{ getSumCo2e(selectedEcoActions)  | number : '1.1-2'}}
 </p>
 
-<mat-tab-group mat-align-tabs="start">
-  <mat-tab label="Transporte">
-    <mat-selection-list #transport>
-      <div *ngFor="let ecoAction of ecoActions">
-        <mat-list-option *ngIf="ecoAction.categoryType === 1" [value]="ecoAction">
-          {{ecoAction.description}}
-        </mat-list-option>
-      </div>
-    </mat-selection-list>
-  </mat-tab>
+<div class="ecoactions-chart"><div class="ecoactions-chart-bar" [ngStyle]="{'width.%': getWithBar(getSumCo2e(selectedEcoActions))}"></div></div>
 
-  <mat-tab label="Alimentación">
-    <mat-selection-list #feeding>
-      <div *ngFor="let ecoAction of ecoActions">
-        <mat-list-option *ngIf="ecoAction.categoryType === 2" [value]="ecoAction">
-          {{ecoAction.description}}
-        </mat-list-option>
-      </div>
-    </mat-selection-list>
-  </mat-tab>
+<mat-selection-list #selectedEcoActions (selectionChange)="onChange('transport', selectedEcoActions.selectedOptions.selected)">
+  <mat-tab-group mat-align-tabs="start">
+    <mat-tab label="Transporte">
+        <div *ngFor="let ecoAction of ecoActions">
+          <mat-list-option *ngIf="ecoAction.categoryType === 1" [value]="ecoAction">
+            {{ecoAction.description}}
+          </mat-list-option>
+        </div>
+    </mat-tab>
 
-  <mat-tab label="Energía">
-    <mat-selection-list #energy>
-      <div *ngFor="let ecoAction of ecoActions">
-        <mat-list-option *ngIf="ecoAction.categoryType === 3" [value]="ecoAction">
-          {{ecoAction.description}}
-        </mat-list-option>
-      </div>
-    </mat-selection-list>
-  </mat-tab>
-</mat-tab-group>
+    <mat-tab label="Alimentación">
+        <div *ngFor="let ecoAction of ecoActions">
+          <mat-list-option *ngIf="ecoAction.categoryType === 2" [value]="ecoAction">
+            {{ecoAction.description}}
+          </mat-list-option>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Energía">
+        <div *ngFor="let ecoAction of ecoActions">
+          <mat-list-option *ngIf="ecoAction.categoryType === 3" [value]="ecoAction">
+            {{ecoAction.description}}
+          </mat-list-option>
+        </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-selection-list>
+
