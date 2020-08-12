@@ -1,39 +1,38 @@
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
-  <!-- <mat-step [stepControl]="firstFormGroup">
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Basic Details</ng-template>
       <mat-form-field>
         <mat-label>FirstName</mat-label>
         <input matInput placeholder="FirstName" formControlName="firstName" required>
+        <mat-error *ngIf="firstNameErrorMessage">{{firstNameErrorMessage}}</mat-error>
       </mat-form-field>
       <br/>
       <mat-form-field>
         <mat-label>LastName</mat-label>
         <input matInput placeholder="LastName" formControlName="lastName" required>
+        <mat-error *ngIf="lastNameErrorMessage">{{lastNameErrorMessage}}</mat-error>
       </mat-form-field>
       <br/>
       <mat-form-field>
         <mat-label>Description</mat-label>
         <textarea matInput placeholder="Description" formControlName="description"></textarea>
+        <mat-error *ngIf="descriptionErrorMessage">{{descriptionErrorMessage}}</mat-error>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
-  </mat-step>-->
+  </mat-step>
 
   <mat-step [stepControl]="ecoActionsGroup">
     <form [formGroup]="ecoActionsGroup">
       <ng-template matStepLabel>ECO Actions</ng-template>
       <ng-container formArrayName="ecoActions">
-        <div *ngFor="let _ of ecoActionsGroup.value.ecoActions.controls; index as i">
-          <ng-container [formGroupName]="i">
-            <input formControlName="description" />
-          </ng-container>
-        </div>
       </ng-container>
       <app-eco-action-list></app-eco-action-list>
-
+  {{ecoActionsErrorMessage}}
+      <div *ngIf="ecoActionsErrorMessage">{{ecoActionsErrorMessage}}</div>
       <br/>
       <div>
         <button mat-button matStepperPrevious>Back</button>

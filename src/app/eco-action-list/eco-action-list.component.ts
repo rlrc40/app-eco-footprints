@@ -11,6 +11,7 @@ import { EcoActionService } from '../service/EcoAction.service';
 })
 export class EcoActionListComponent implements OnInit {
   ecoActions: EcoAction[] = [];
+  totalBar: number = 7.4;
 
   constructor(private ecoActionService: EcoActionService) { }
 
@@ -31,7 +32,7 @@ export class EcoActionListComponent implements OnInit {
   }
 
   getWithBar(co2e): Number {
-    return (100 - (co2e * 100) / 7.4);
+    return (100 - (co2e * 100) / this.totalBar);
   }
 
   onChange(key: string, options: MatListOption[]): void {

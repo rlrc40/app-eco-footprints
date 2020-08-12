@@ -14,7 +14,6 @@ import { EcoAction } from '../models/EcoAction';
 })
 export class EcoFootprintFormComponent implements OnInit {
   ecoActionsField: BehaviorSubject<EcoAction[]>;
-  isLinear: true;
   firstFormGroup: FormGroup;
   ecoActionsGroup: FormGroup;
 
@@ -27,16 +26,21 @@ export class EcoFootprintFormComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      description: ['']
+      firstName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      lastName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      description: new FormControl('', [
+        Validators.maxLength(300),
+      ]),
     });
 
     this.ecoActionsGroup = this._formBuilder.group({
-      ecoActions: new FormArray([
-        new FormGroup({
-          description: new FormControl('')
-        })], this.validateEcoActions)
+      ecoActions: new FormArray([], [this.validateEcoActions])
     });
 
     this.ecoActionService.getEcoActionsField().subscribe( data => {
@@ -45,10 +49,6 @@ export class EcoFootprintFormComponent implements OnInit {
         this.ecoActions.push(new FormControl(ecoAction, Validators.required));
       }
     });
-  }
-
-  get ecoActions() {
-    return this.ecoActionsGroup.get('ecoActions') as FormArray
   }
 
   validateEcoActions(arr: FormArray): Boolean {
@@ -67,5 +67,46 @@ export class EcoFootprintFormComponent implements OnInit {
         console.log(result)
       });
   }
+
+  get ecoActions() {
+    return this.ecoActionsGroup.get('ecoActions') as FormArray
+  }
+  get ecoActionsErrorMessage() {
+    const ecoActions = this.ecoActionsGroup.get('ecoActions');
+    if (ecoActions.invalid && (ecoActions.dirty || ecoActions.touched)) {
+      return 'ecoActions is required.';
+    }
+    return false;
+  }
+
+  get firstName() { return this.firstFormGroup.get('firstName') }
+  get firstNameErrorMessage() {
+    const firstName = this.firstFormGroup.get('firstName');
+    if (firstName.invalid && (firstName.dirty || firstName.touched)) {
+      if (firstName.errors.required) return 'Firstname is required.';
+      if (firstName.errors.minlength) return 'Firstname must be at least 4 characters long';
+    }
+    return false;
+  }
+
+  get lastName() { return this.firstFormGroup.get('lastName') }
+  get lastNameErrorMessage() {
+    const lastName = this.firstFormGroup.get('lastName');
+    if (lastName.invalid && (lastName.dirty || lastName.touched)) {
+      if (lastName.errors.required) return 'Lastname is required.';
+      if (lastName.errors.minlength) return 'Lastname must be at least 4 characters long';
+    }
+    return false;
+  }
+
+  get description() { return this.firstFormGroup.get('description') }
+  get descriptionErrorMessage() {
+    const description = this.firstFormGroup.get('description');
+    if (description.invalid && (description.dirty || description.touched)) {
+      if (description.errors.maxlength) return 'Description must be as much 300 characters long';
+    }
+    return false;
+  }
+
 
 }
