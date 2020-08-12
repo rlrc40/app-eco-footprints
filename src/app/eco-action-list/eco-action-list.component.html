@@ -1,37 +1,44 @@
-<p>
-  Options selected: {{ getNumberOfSelectedActions(selectedEcoActions) }}
-</p>
-<p>
-  Total co2e: {{ getSumCo2e(selectedEcoActions)  | number : '1.1-2'}}
-</p>
+<div class="eco-action-list">
+  <app-eco-action-list-information [ecoActions]="selectedEcoActions.selectedOptions.selected" class="eco-action-list-information"></app-eco-action-list-information>
 
-<div class="ecoactions-chart"><div class="ecoactions-chart-bar" [ngStyle]="{'width.%': getWithBar(getSumCo2e(selectedEcoActions))}"></div></div>
 
-<mat-selection-list #selectedEcoActions (selectionChange)="onChange('transport', selectedEcoActions.selectedOptions.selected)">
-  <mat-tab-group mat-align-tabs="start">
-    <mat-tab label="Transporte">
-        <div *ngFor="let ecoAction of ecoActions">
-          <mat-list-option *ngIf="ecoAction.categoryType === 1" [value]="ecoAction">
-            {{ecoAction.description}}
-          </mat-list-option>
-        </div>
-    </mat-tab>
+  <div class="eco-action-list-chart">
+    <div class="eco-action-list-chart-options">
+      <mat-selection-list #selectedEcoActions (selectionChange)="onChange('transport', selectedEcoActions.selectedOptions.selected)">
+        <mat-tab-group mat-align-tabs="start">
+          <mat-tab label="Transporte">
+              <div *ngFor="let ecoAction of ecoActions">
+                <mat-list-option *ngIf="ecoAction.categoryType === 1" [value]="ecoAction">
+                  {{ecoAction.description}}
+                </mat-list-option>
+              </div>
+          </mat-tab>
 
-    <mat-tab label="Alimentación">
-        <div *ngFor="let ecoAction of ecoActions">
-          <mat-list-option *ngIf="ecoAction.categoryType === 2" [value]="ecoAction">
-            {{ecoAction.description}}
-          </mat-list-option>
-        </div>
-    </mat-tab>
+          <mat-tab label="Alimentación">
+              <div *ngFor="let ecoAction of ecoActions">
+                <mat-list-option *ngIf="ecoAction.categoryType === 2" [value]="ecoAction">
+                  {{ecoAction.description}}
+                </mat-list-option>
+              </div>
+          </mat-tab>
 
-    <mat-tab label="Energía">
-        <div *ngFor="let ecoAction of ecoActions">
-          <mat-list-option *ngIf="ecoAction.categoryType === 3" [value]="ecoAction">
-            {{ecoAction.description}}
-          </mat-list-option>
-        </div>
-    </mat-tab>
-  </mat-tab-group>
-</mat-selection-list>
+          <mat-tab label="Energía">
+              <div *ngFor="let ecoAction of ecoActions">
+                <mat-list-option *ngIf="ecoAction.categoryType === 3" [value]="ecoAction">
+                  {{ecoAction.description}}
+                </mat-list-option>
+              </div>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-selection-list>
+    </div>
+    <div>
+      <div class="eco-action-list-chart-bar">
+        <div class="eco-action-list-chart-bar_fill" [ngStyle]="{'height.%': getWithBar(getSumCo2e(selectedEcoActions))}"></div>
+      </div>
+      <h4 class="eco-action-list-chart-bar-title">Carbon footprint, Spanish average, in tons of co2e</h4>
+    </div>
+  </div>
+
+</div>
 

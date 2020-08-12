@@ -1,0 +1,29 @@
+<div class="eco-footprint-detail">
+  <div *ngIf="!isLoading && ecoFootprint">
+    <div *ngIf="ecoFootprint.firstName">
+      <strong>Name: </strong>
+      {{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}
+    </div>
+    <div *ngIf="ecoFootprint.description">
+      <strong>Description: </strong>
+      {{ ecoFootprint.description }}
+    </div>
+    <div *ngIf="ecoFootprint.ecoActions && ecoFootprint.ecoActions.length > 0">
+      <strong>ECO Actions: </strong>
+      <ul>
+        <li *ngFor="let ecoAction of ecoFootprint.ecoActions">
+          <span *ngIf="ecoAction"> {{ ecoAction.description }} </span>
+        </li>
+      </ul>
+    </div>
+    <br/>
+    <br/>
+
+    <a routerLink="/list">
+      <button mat-raised-button color="warn" aria-label="Back to list">
+        <mat-icon>arrow_back</mat-icon> Back
+      </button>
+    </a>
+  </div>
+  <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+</div>

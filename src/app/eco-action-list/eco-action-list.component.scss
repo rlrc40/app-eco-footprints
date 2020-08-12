@@ -1,11 +1,33 @@
-.ecoactions-chart {
-  height: 30px;
-  width: 300px;
-  border: 3px solid black;
-  .ecoactions-chart-bar {
+.eco-action-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .eco-action-list-information {
     width: 100%;
-    height: 100%;
-    background-color: red;
-    transition: all .6s ease-in-out;
+  }
+  &-chart {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    &-bar {
+      height: 80%;
+      width: 60px;
+      border: 3px solid black;
+      padding: 3px;
+      display: flex;
+      align-items: flex-end;
+      margin: auto;
+      &-title {
+        position: relative;
+        bottom: -23px;
+        margin-bottom: 0px;
+      }
+      .eco-action-list-chart-bar_fill {
+        width: 100%;
+        height: 100%;
+        background-color: red;
+        transition: all .6s ease-in-out;
+      }
+    }
   }
 }

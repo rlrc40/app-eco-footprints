@@ -6,13 +6,19 @@
   &-item {
     margin: 15px;
     padding: 20px;
+    padding-top: 50px;
     border: 2px solid lightgreen;
     border-radius: 10px;
     position: relative;
+    cursor: pointer;
+    &:hover .eco-footprint-list-item-delete {
+      display: block;
+    }
     &-delete {
       position: absolute;
       right: 10px;
       top: 10px;
+      display: none;
     }
   }
   mat-spinner {

@@ -30,10 +30,6 @@ export class EcoActionListComponent implements OnInit {
     return list.length && list.map( action => action.value.co2e ).reduce(getSum) || 0;
   }
 
-  getNumberOfSelectedActions(ecoActions): Number {
-    return ecoActions.selectedOptions.selected.length;
-  }
-
   getWithBar(co2e): Number {
     return (100 - (co2e * 100) / 7.4);
   }

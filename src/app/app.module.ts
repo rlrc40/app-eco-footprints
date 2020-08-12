@@ -21,13 +21,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EcoActionListComponent } from './eco-action-list/eco-action-list.component';
 import { EcoFootprintFormComponent } from './eco-footprint-form/eco-footprint-form.component';
 import { EcoFootprintListComponent } from './eco-footprint-list/eco-footprint-list.component';
+import { EcoActionListInformationComponent } from './eco-action-list-information/eco-action-list-information.component';
+import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprint-detail.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       EcoActionListComponent,
       EcoFootprintFormComponent,
-      EcoFootprintListComponent
+      EcoFootprintListComponent,
+      EcoActionListInformationComponent,
+      EcoFootprintDetailComponent
    ],
    imports: [
       BrowserModule,
