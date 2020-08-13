@@ -31,12 +31,11 @@
       <ng-container formArrayName="ecoActions">
       </ng-container>
       <app-eco-action-list></app-eco-action-list>
-  {{ecoActionsErrorMessage}}
       <div *ngIf="ecoActionsErrorMessage">{{ecoActionsErrorMessage}}</div>
       <br/>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button (click)="onNextSecondStep()">Next</button>
       </div>
     </form>
   </mat-step>

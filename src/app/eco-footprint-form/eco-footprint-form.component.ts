@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 
@@ -13,6 +13,7 @@ import { EcoAction } from '../models/EcoAction';
   styleUrls: ['./eco-footprint-form.component.scss']
 })
 export class EcoFootprintFormComponent implements OnInit {
+  @ViewChild('stepper') stepper;
   ecoActionsField: BehaviorSubject<EcoAction[]>;
   firstFormGroup: FormGroup;
   ecoActionsGroup: FormGroup;
@@ -62,10 +63,18 @@ export class EcoFootprintFormComponent implements OnInit {
         ...this.firstFormGroup.value,
         ...this.ecoActionsGroup.value,
       };
-      this.ecoFootprintService.save(newEcoFootprint).subscribe(result => {
-        this.router.navigate(['/list', { }]);
-        console.log(result)
-      });
+      if (this.validateEcoActions(this.ecoActions)) {
+        this.ecoFootprintService.save(newEcoFootprint).subscribe(result => {
+          this.router.navigate(['/list', { }]);
+          console.log(result)
+        });
+      }
+  }
+
+  onNextSecondStep() {
+    if (this.validateEcoActions(this.ecoActions)) {
+      this.stepper.next();
+    }
   }
 
   get ecoActions() {
@@ -73,8 +82,8 @@ export class EcoFootprintFormComponent implements OnInit {
   }
   get ecoActionsErrorMessage() {
     const ecoActions = this.ecoActionsGroup.get('ecoActions');
-    if (ecoActions.invalid && (ecoActions.dirty || ecoActions.touched)) {
-      return 'ecoActions is required.';
+    if (ecoActions.invalid || !this.validateEcoActions(this.ecoActions)) {
+      return 'Eco Actions is required.';
     }
     return false;
   }
