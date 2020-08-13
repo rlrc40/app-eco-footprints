@@ -24,6 +24,10 @@ export class EcoActionListComponent implements OnInit {
       .subscribe(ecoActions => this.ecoActions = ecoActions);
   }
 
+  getCurrentEcoActions(ecoActions) {
+    return ecoActions.selectedOptions.selected.map(action => action.value);
+  }
+
   getSumCo2e(ecoActions): Number {
     const getSum = (total, value) => total + value;
 

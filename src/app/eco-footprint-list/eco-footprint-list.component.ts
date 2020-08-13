@@ -30,7 +30,7 @@ export class EcoFootprintListComponent implements OnInit {
     this.isLoading = true;
     this.ecoFootprintService.delete(ecoFootprintId)
       .subscribe(() => {
-        this.getEcoFootprints.bind(this)
+        this.ecoFootprints = this.ecoFootprints.filter(footprint => footprint.id !== ecoFootprintId);
         setTimeout(() => {
           this.isLoading = false;
         }, 1000);
