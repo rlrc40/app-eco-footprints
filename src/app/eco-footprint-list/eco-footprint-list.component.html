@@ -1,19 +1,20 @@
-<div class="eco-footprint-list" *ngIf="!isLoading">
-  <div *ngFor="let ecoFootprint of ecoFootprints" class="eco-footprint-list-item" routerLink="/{{ecoFootprint.id}}">
-    <button class="eco-footprint-list-item-delete" mat-icon-button color="warn" aria-label="Delete eco footprint" (click)="deleteEcoFootprint(ecoFootprint.id)">
-      <mat-icon>delete</mat-icon>
-    </button>
-    <div *ngIf="ecoFootprint.description">
-      <strong>Description: </strong>
-      {{ ecoFootprint.description }}
-    </div>
-
-    <div *ngIf="ecoFootprint.ecoActions">
-      <strong>ECO Actions: </strong>
-      <app-eco-action-list-information [ecoActions]="ecoFootprint.ecoActions" class="eco-action-list-information"></app-eco-action-list-information>
-    </div>
-    <br/>
-    <br/>
+<div class="eco-footprint-box-loading">
+  <div class="eco-footprint-list" *ngIf="!isLoading">
+      <mat-card class="eco-footprint-list-card" *ngFor="let ecoFootprint of ecoFootprints" routerLink="/{{ecoFootprint.id}}">
+        <mat-card-header>
+          <div mat-card-avatar class="eco-footprint-list-card-header-image"></div>
+          <mat-card-title>{{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}</mat-card-title>
+          <mat-card-subtitle class="eco-footprint-list-card-header-description">{{ ecoFootprint.description }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <app-eco-action-list-information [ecoActions]="ecoFootprint.ecoActions" class="eco-action-list-information"></app-eco-action-list-information>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="eco-footprint-list-item-delete" mat-icon-button color="warn" aria-label="Delete eco footprint" (click)="deleteEcoFootprint(ecoFootprint.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
   </div>
+  <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
 </div>
-<mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>

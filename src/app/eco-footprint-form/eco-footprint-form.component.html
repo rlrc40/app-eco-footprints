@@ -14,6 +14,22 @@
         <mat-error *ngIf="lastNameErrorMessage">{{lastNameErrorMessage}}</mat-error>
       </mat-form-field>
       <br/>
+
+      <label class="image-upload-container btn btn-bwm">
+        <span>Upload Image</span>
+        <mat-icon>file_upload</mat-icon>
+        <input #imageInput
+          hidden="true"
+          type="file"
+          formControlName="image"
+          accept="image/*"
+          (change)="processFile(imageInput)">
+      </label>
+
+      <mat-progress-bar *ngIf="selectedFile" [value]="selectedFile.progress"></mat-progress-bar>
+      <br/>
+      <label class="inputLable">Lable:</label> <span *ngIf="selectedFile"> {{ selectedFile.file.name }}</span>
+      <br/>
       <mat-form-field>
         <mat-label>Description</mat-label>
         <textarea matInput placeholder="Description" formControlName="description"></textarea>

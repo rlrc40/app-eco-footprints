@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EcoFootprintService } from '../service/EcoFootprint.service';
+import { ImageService } from '../service/Image.service';
 import { EcoFootprint } from '../models/EcoFootprint';
+import { Observable } from 'rxjs/internal/Observable';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-eco-footprint-list',
@@ -10,9 +13,14 @@ import { EcoFootprint } from '../models/EcoFootprint';
 })
 export class EcoFootprintListComponent implements OnInit {
   ecoFootprints: EcoFootprint[] = [];
+  ecoFootprintsImages: string[] = [];
   isLoading: Boolean = true;
 
-  constructor(private ecoFootprintService: EcoFootprintService) { }
+  constructor(
+    private ecoFootprintService: EcoFootprintService,
+    private imageService: ImageService,
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit() {
     setTimeout(() => {

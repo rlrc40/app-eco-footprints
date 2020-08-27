@@ -4,8 +4,13 @@ import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@ang
 
 import { EcoActionService } from '../service/EcoAction.service';
 import { EcoFootprintService } from '../service/EcoFootprint.service';
+import { ImageService } from '../service/Image.service';
 import { BehaviorSubject } from 'rxjs';
 import { EcoAction } from '../models/EcoAction';
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
 
 @Component({
   selector: 'app-eco-footprint-form',
@@ -17,12 +22,14 @@ export class EcoFootprintFormComponent implements OnInit {
   ecoActionsField: BehaviorSubject<EcoAction[]>;
   firstFormGroup: FormGroup;
   ecoActionsGroup: FormGroup;
+  selectedFile: ImageSnippet;
 
   constructor(
     private router: Router,
     private _formBuilder: FormBuilder,
     private ecoActionService: EcoActionService,
     private ecoFootprintService: EcoFootprintService,
+    private imageService: ImageService,
   ) { }
 
   ngOnInit() {
@@ -38,6 +45,7 @@ export class EcoFootprintFormComponent implements OnInit {
       description: new FormControl('', [
         Validators.maxLength(300),
       ]),
+      image: new FormControl(null, [Validators.required])
     });
 
     this.ecoActionsGroup = this._formBuilder.group({
@@ -64,16 +72,50 @@ export class EcoFootprintFormComponent implements OnInit {
         ...this.ecoActionsGroup.value,
       };
       if (this.validateEcoActions(this.ecoActions)) {
-        this.ecoFootprintService.save(newEcoFootprint).subscribe(result => {
-          this.router.navigate(['/list', { }]);
-          console.log(result)
-        });
+
+
+        this.imageService.uploadImage(this.selectedFile.file).subscribe(
+          photoId => {
+            newEcoFootprint.photo = photoId;
+            this.ecoFootprintService.save(newEcoFootprint).subscribe(result => {
+              this.router.navigate(['/list', { }]);
+              console.log(result)
+            });
+          },
+          (err) => {
+            console.log(err);
+        })
       }
+  }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+    });
+
+    reader.readAsDataURL(file);
   }
 
   onNextSecondStep() {
     if (this.validateEcoActions(this.ecoActions)) {
       this.stepper.next();
+    }
+  }
+
+  requiredFileType( ) {
+    const file = this.firstFormGroup.get('image');
+    if ( file ) {
+      // const extension = file.name.split('.')[1].toLowerCase();
+      // if ( type.toLowerCase() !== extension.toLowerCase() ) {
+      //   return {
+      //     requiredFileType: true
+      //   };
+      // }
+
+      return null;
     }
   }
 

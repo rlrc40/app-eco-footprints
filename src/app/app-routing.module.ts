@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'new', component: EcoFootprintFormComponent },
   { path: 'list', component: EcoFootprintListComponent },
   { path: 'list', component: EcoFootprintListComponent },
-  { path: ':id', component: EcoFootprintDetailComponent },
+  { path: ':id', component: EcoFootprintDetailComponent, data: { animation: 'ecofootprint-description' } },
 ];
 
 @NgModule({

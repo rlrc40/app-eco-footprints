@@ -1,7 +1,4 @@
 <div class="eco-action-list">
-  <app-eco-action-list-information [ecoActions]="getCurrentEcoActions(selectedEcoActions)" class="eco-action-list-information"></app-eco-action-list-information>
-
-
   <div class="eco-action-list-chart">
     <div class="eco-action-list-chart-options">
       <mat-selection-list #selectedEcoActions (selectionChange)="onChange('transport', selectedEcoActions.selectedOptions.selected)">
@@ -36,6 +33,7 @@
       <div class="eco-action-list-chart-box-bar">
         <div class="eco-action-list-chart-box-bar_fill" [ngStyle]="{'height.%': getWithBar(getSumCo2e(selectedEcoActions))}"></div>
       </div>
+      <app-eco-action-list-information [ecoActions]="getCurrentEcoActions(selectedEcoActions)" class="eco-action-list-information"></app-eco-action-list-information>
       <h4 class="eco-action-list-chart-box-bar-title">Carbon footprint, Spanish average, in tons of co2e</h4>
     </div>
   </div>

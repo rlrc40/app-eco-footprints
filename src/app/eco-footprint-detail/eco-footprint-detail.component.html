@@ -1,29 +1,30 @@
 <div class="eco-footprint-detail">
-  <div *ngIf="!isLoading && ecoFootprint">
-    <div *ngIf="ecoFootprint.firstName">
-      <strong>Name: </strong>
-      {{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}
+  <div class="eco-footprint-box-loading">
+    <div *ngIf="!isLoading && ecoFootprint" class="eco-footprint-detail-content">
+      <!-- <a routerLink="/list" class="eco-footprint-detail-content-back">
+        <button mat-raised-button color="warn" aria-label="Back to list">
+          <mat-icon>arrow_back</mat-icon> Back
+        </button>
+      </a> -->
+      <div mat-card-avatar class="eco-footprint-detail-content-avatar"></div>
+      <div *ngIf="ecoFootprint.firstName">
+        <strong>Name: </strong><br/>
+        {{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}
+      </div>
+      <br/>
+      <div *ngIf="ecoFootprint.description">
+        <strong>Description: </strong><br/>
+        {{ ecoFootprint.description }}
+      </div>
+      <img mat-card-image class="eco-footprint-detail-content-image" *ngIf="ecoFootprint.photo" [src]="photoURL" alt="Profile photo">
+      <div *ngIf="ecoFootprint.ecoActions && ecoFootprint.ecoActions.length > 0">
+        <strong>ECO Actions: </strong>
+        <ul class="eco-footprint-detail-content-ecoActions">
+          <li *ngFor="let ecoAction of ecoFootprint.ecoActions">
+            <span *ngIf="ecoAction"> {{ ecoAction.description }} </span> - <span *ngIf="ecoAction" class="eco-footprint-detail-content-ecoActions-co2e"> {{ ecoAction.co2e }} co2e </span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div *ngIf="ecoFootprint.description">
-      <strong>Description: </strong>
-      {{ ecoFootprint.description }}
-    </div>
-    <div *ngIf="ecoFootprint.ecoActions && ecoFootprint.ecoActions.length > 0">
-      <strong>ECO Actions: </strong>
-      <ul>
-        <li *ngFor="let ecoAction of ecoFootprint.ecoActions">
-          <span *ngIf="ecoAction"> {{ ecoAction.description }} </span>
-        </li>
-      </ul>
-    </div>
-    <br/>
-    <br/>
-
-    <a routerLink="/list">
-      <button mat-raised-button color="warn" aria-label="Back to list">
-        <mat-icon>arrow_back</mat-icon> Back
-      </button>
-    </a>
+    <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
   </div>
-  <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
-</div>

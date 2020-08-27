@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,8 +17,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EcoActionListComponent } from './eco-action-list/eco-action-list.component';
 import { EcoFootprintFormComponent } from './eco-footprint-form/eco-footprint-form.component';
 import { EcoFootprintListComponent } from './eco-footprint-list/eco-footprint-list.component';
@@ -35,6 +36,7 @@ import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprin
    ],
    imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       AppRoutingModule,
       BrowserAnimationsModule,
       MatTabsModule,
@@ -49,7 +51,8 @@ import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprin
       MatProgressSpinnerModule,
       HttpClientModule,
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      MatCardModule
    ],
    providers: [],
    bootstrap: [
