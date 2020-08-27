@@ -29,10 +29,11 @@
       max-width: 100%;
       max-height: 300px;
       width: auto;
-      margin: 16px auto;
+      margin: auto;
     }
     &-ecoActions {
-      padding-left: 20px;
+      padding: 0px 20px;
+      margin: 0px;
       &-co2e {
         font-size: 12px;
         white-space: nowrap;

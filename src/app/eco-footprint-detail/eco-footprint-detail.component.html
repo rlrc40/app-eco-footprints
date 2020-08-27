@@ -16,7 +16,10 @@
         <strong>Description: </strong><br/>
         {{ ecoFootprint.description }}
       </div>
+      <br/>
       <img mat-card-image class="eco-footprint-detail-content-image" *ngIf="ecoFootprint.photo" [src]="photoURL" alt="Profile photo">
+      <br *ngIf="ecoFootprint.photo"/>
+      <br *ngIf="ecoFootprint.photo"/>
       <div *ngIf="ecoFootprint.ecoActions && ecoFootprint.ecoActions.length > 0">
         <strong>ECO Actions: </strong>
         <ul class="eco-footprint-detail-content-ecoActions">
