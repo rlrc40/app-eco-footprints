@@ -89,6 +89,7 @@ export class EcoFootprintFormComponent implements OnInit {
   }
 
   processFile(imageInput: any) {
+    if (!imageInput) return;
     const file: File = imageInput.files[0];
     const reader = new FileReader();
 
