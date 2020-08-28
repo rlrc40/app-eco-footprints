@@ -12,6 +12,7 @@ import { EcoActionService } from '../service/EcoAction.service';
 export class EcoActionListComponent implements OnInit {
   ecoActions: EcoAction[] = [];
   totalBar: number = 7.4;
+  ticks: number[] = [0, 1, 2, 3, 4, 5, 6];
 
   constructor(private ecoActionService: EcoActionService) { }
 
@@ -37,6 +38,11 @@ export class EcoActionListComponent implements OnInit {
 
   getWithBar(co2e): Number {
     return (100 - (co2e * 100) / this.totalBar);
+  }
+
+  getCo2eColor(ecoActions, ecoActionId: String): String {
+    const selectedIds = ecoActions?.selectedOptions?.selected?.map( action => action.value.id );
+    return selectedIds.indexOf(ecoActionId) !== -1 ? '#ff4081' : '#d9d9d9';
   }
 
   onChange(key: string, options: MatListOption[]): void {
