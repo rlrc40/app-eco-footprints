@@ -45,7 +45,7 @@ export class EcoFootprintFormComponent implements OnInit {
       description: new FormControl('', [
         Validators.maxLength(300),
       ]),
-      image: new FormControl(null, [Validators.required])
+      image: new FormControl(null)
     });
 
     this.ecoActionsGroup = this._formBuilder.group({
