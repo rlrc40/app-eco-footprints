@@ -31,7 +31,7 @@ export class EcoFootprintListComponent implements OnInit {
 
   getEcoFootprints(): void {
     this.ecoFootprintService.findAll()
-      .subscribe(ecoFootprints => this.ecoFootprints = ecoFootprints);
+      .subscribe(ecoFootprints => this.ecoFootprints = ecoFootprints.reverse());
   }
 
   deleteEcoFootprint(ecoFootprintId: string): void {
