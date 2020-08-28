@@ -1,84 +1,86 @@
-<mat-horizontal-stepper linear #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Basic Details</ng-template>
-      <mat-form-field>
-        <mat-label>FirstName</mat-label>
-        <input matInput placeholder="FirstName" formControlName="firstName" required>
-        <mat-error *ngIf="firstNameErrorMessage">{{firstNameErrorMessage}}</mat-error>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <mat-label>LastName</mat-label>
-        <input matInput placeholder="LastName" formControlName="lastName" required>
-        <mat-error *ngIf="lastNameErrorMessage">{{lastNameErrorMessage}}</mat-error>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Description" formControlName="description"></textarea>
-        <mat-error *ngIf="descriptionErrorMessage">{{descriptionErrorMessage}}</mat-error>
-      </mat-form-field>
-      <br/>
-      <br/>
+<div class="eco-footprint-form">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Basic Details</ng-template>
+        <mat-form-field>
+          <mat-label>FirstName</mat-label>
+          <input matInput placeholder="FirstName" formControlName="firstName" required>
+          <mat-error *ngIf="firstNameErrorMessage">{{firstNameErrorMessage}}</mat-error>
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <mat-label>LastName</mat-label>
+          <input matInput placeholder="LastName" formControlName="lastName" required>
+          <mat-error *ngIf="lastNameErrorMessage">{{lastNameErrorMessage}}</mat-error>
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="Description" formControlName="description"></textarea>
+          <mat-error *ngIf="descriptionErrorMessage">{{descriptionErrorMessage}}</mat-error>
+        </mat-form-field>
+        <br/>
+        <br/>
 
-      <div >
-        <label class="image-upload-container">
-          <div *ngIf="selectedFile" class="image-upload-container-label"> {{ selectedFile.file.name }}</div>
-          <div *ngIf="!selectedFile" class="image-upload-container-label"> Upload an image </div>
-          <mat-icon class="image-upload-container-icon" >search</mat-icon>
-          <input #imageInput
-            hidden="true"
-            type="file"
-            formControlName="image"
-            accept="image/*"
-            (change)="processFile(imageInput)">
-        </label>
-      </div>
-      <br/>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
+        <div >
+          <label class="image-upload-container">
+            <div *ngIf="selectedFile" class="image-upload-container-label"> {{ selectedFile.file.name }}</div>
+            <div *ngIf="!selectedFile" class="image-upload-container-label"> Upload an image </div>
+            <mat-icon class="image-upload-container-icon" >search</mat-icon>
+            <input #imageInput
+              hidden="true"
+              type="file"
+              formControlName="image"
+              accept="image/*"
+              (change)="processFile(imageInput)">
+          </label>
+        </div>
+        <br/>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
 
-  <mat-step [stepControl]="ecoActionsGroup">
-    <form [formGroup]="ecoActionsGroup">
-      <ng-template matStepLabel>ECO Actions</ng-template>
-      <ng-container formArrayName="ecoActions">
-      </ng-container>
-      <app-eco-action-list></app-eco-action-list>
-      <br/>
-      <div *ngIf="ecoActionsErrorMessage">{{ecoActionsErrorMessage}}</div>
-      <br/>
+    <mat-step [stepControl]="ecoActionsGroup">
+      <form [formGroup]="ecoActionsGroup">
+        <ng-template matStepLabel>ECO Actions</ng-template>
+        <ng-container formArrayName="ecoActions">
+        </ng-container>
+        <app-eco-action-list></app-eco-action-list>
+        <br/>
+        <div *ngIf="ecoActionsErrorMessage">{{ecoActionsErrorMessage}}</div>
+        <br/>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="onNextSecondStep()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Save</ng-template>
+
+      <mat-list>
+      <strong>Name: </strong>
+      <mat-list-item> {{ this.firstFormGroup.value.firstName }} {{ this.firstFormGroup.value.lastName }}</mat-list-item>
+      <strong>Description: </strong>
+      <mat-list-item> {{ this.firstFormGroup.value.description }}</mat-list-item>
+      <strong>ECO Actions: </strong>
+      <div *ngIf="ecoActionsGroup.value.ecoActions.length > 0">
+        <mat-list-item *ngFor="let ecoAction of ecoActionsGroup.value.ecoActions">
+          <span *ngIf="ecoAction"> {{ ecoAction.description }} </span>
+        </mat-list-item>
+      </div>
+
+    </mat-list>
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="onNextSecondStep()">Next</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button (click)="submit()">Submit</button>
       </div>
-    </form>
-  </mat-step>
-
-  <mat-step>
-    <ng-template matStepLabel>Save</ng-template>
-
-    <mat-list>
-    <strong>Name: </strong>
-    <mat-list-item> {{ this.firstFormGroup.value.firstName }} {{ this.firstFormGroup.value.lastName }}</mat-list-item>
-    <strong>Description: </strong>
-    <mat-list-item> {{ this.firstFormGroup.value.description }}</mat-list-item>
-    <strong>ECO Actions: </strong>
-    <div *ngIf="ecoActionsGroup.value.ecoActions.length > 0">
-      <mat-list-item *ngFor="let ecoAction of ecoActionsGroup.value.ecoActions">
-        <span *ngIf="ecoAction"> {{ ecoAction.description }} </span>
-      </mat-list-item>
-    </div>
-
-	</mat-list>
-
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-      <button mat-button (click)="submit()">Submit</button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
