@@ -11,7 +11,7 @@ import { EcoFootprint } from '../models/EcoFootprint';
 })
 export class EcoFootprintService {
 
-  private ecoFootprintsUrl = `${window.location.protocol}//${window.location.hostname}:4200/eco-footprints`;
+  private ecoFootprintsUrl = `https://eco-footprint-api.herokuapp.com//eco-footprints`;
 
   constructor(private http: HttpClient) { }
 

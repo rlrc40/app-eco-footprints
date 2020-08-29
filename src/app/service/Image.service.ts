@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
   providedIn: 'root'
 })
 export class ImageService {
-  private ecoFootprintsPhotosUrl = `${window.location.protocol}//${window.location.hostname}:4200/photos`;
+  private ecoFootprintsPhotosUrl = `https://eco-footprint-api.herokuapp.com//photos`;
 
   constructor(private http: HttpClient) {}
 

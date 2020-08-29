@@ -11,7 +11,7 @@ import { EcoAction } from '../models/EcoAction';
 })
 export class EcoActionService {
 
-  private ecoActionUrl = `${window.location.protocol}//${window.location.hostname}:4200/eco-action`;  // URL to web api
+  private ecoActionUrl = `https://eco-footprint-api.herokuapp.com//eco-action`;  // URL to web api
   private _ecoActionsField = new BehaviorSubject<EcoAction[]>([]);
 
   httpOptions = {
