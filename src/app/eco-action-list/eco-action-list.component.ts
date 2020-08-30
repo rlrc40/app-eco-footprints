@@ -1,8 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatListOption } from '@angular/material/list'
 
 import { EcoAction } from '../models/EcoAction';
 import { EcoActionService } from '../service/EcoAction.service';
+
+import { getBarStyle } from '../eco-action-list/eco-actions-bar/utils';
 
 @Component({
   selector: 'app-eco-action-list',
@@ -36,13 +38,17 @@ export class EcoActionListComponent implements OnInit {
     return list.length && list.map( action => action.value.co2e ).reduce(getSum) || 0;
   }
 
-  getWithBar(co2e): Number {
+  getWidthBar(co2e): Number {
     return (100 - (co2e * 100) / this.totalBar);
   }
 
   getCo2eColor(ecoActions, ecoActionId: String): String {
     const selectedIds = ecoActions?.selectedOptions?.selected?.map( action => action.value.id );
     return selectedIds.indexOf(ecoActionId) !== -1 ? '#ff4081' : '#d9d9d9';
+  }
+
+  getCurrentBarStyle(ecoActions: EcoAction[]): object {
+    return getBarStyle(ecoActions, this.totalBar);
   }
 
   onChange(key: string, options: MatListOption[]): void {
