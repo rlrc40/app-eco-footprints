@@ -3,7 +3,7 @@ import { EcoAction } from '../../models/EcoAction';
 export function getBarStyle (ecoActions: EcoAction[], totalBar: number): object  {
   const getSum = (total, value) => total + value;
   const totalCo2e = ecoActions && ecoActions.length && ecoActions.map( action => action.co2e ).reduce(getSum) || 0;
-  const percentage = ((totalCo2e || 0 )* 100) / totalBar;
+  const percentage = ((totalCo2e < totalBar ? totalCo2e : totalBar )* 100) / totalBar;
   var r, g, b = 0;
   if(percentage < 50) {
     r = 255;
