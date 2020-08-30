@@ -20,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 
 import { EcoActionListComponent } from './eco-action-list/eco-action-list.component';
+import { EcoActionsBarComponent } from './eco-action-list/eco-actions-bar/eco-actions-bar.component';
 import { EcoFootprintFormComponent } from './eco-footprint-form/eco-footprint-form.component';
 import { EcoFootprintListComponent } from './eco-footprint-list/eco-footprint-list.component';
 import { EcoActionListInformationComponent } from './eco-action-list-information/eco-action-list-information.component';
@@ -29,6 +30,7 @@ import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprin
    declarations: [
       AppComponent,
       EcoActionListComponent,
+      EcoActionsBarComponent,
       EcoFootprintFormComponent,
       EcoFootprintListComponent,
       EcoActionListInformationComponent,

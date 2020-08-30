@@ -6,27 +6,25 @@
           <mat-icon>arrow_back</mat-icon> Back
         </button>
       </a> -->
-      <div mat-card-avatar class="eco-footprint-detail-content-avatar"></div>
-      <div *ngIf="ecoFootprint.firstName">
-        <strong>Name: </strong><br/>
-        {{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}
+      <div class="eco-footprint-detail-content-userinfo">
+        <div mat-card-avatar class="eco-footprint-detail-content-userinfo-avatar"></div>
+        <div *ngIf="ecoFootprint.firstName" class="eco-footprint-detail-content-userinfo-name">
+          {{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}
+        </div>
+        <div *ngIf="ecoFootprint.description" class="eco-footprint-detail-content-userinfo-description">
+          <br/>
+          {{ ecoFootprint.description }}
+        </div>
+        <img mat-card-image class="eco-footprint-detail-content-userinfo-image" *ngIf="ecoFootprint.photo" [src]="photoURL" alt="Profile photo">
       </div>
-      <br/>
-      <div *ngIf="ecoFootprint.description">
-        <strong>Description: </strong><br/>
-        {{ ecoFootprint.description }}
-      </div>
-      <br/>
-      <img mat-card-image class="eco-footprint-detail-content-image" *ngIf="ecoFootprint.photo" [src]="photoURL" alt="Profile photo">
-      <br *ngIf="ecoFootprint.photo"/>
-      <br *ngIf="ecoFootprint.photo"/>
-      <div *ngIf="ecoFootprint.ecoActions && ecoFootprint.ecoActions.length > 0">
-        <strong>ECO Actions: </strong>
+      <div *ngIf="ecoActions && ecoActions.length > 0" class="eco-footprint-detail-content-footprintinfo">
+        <h2>ECO Actions </h2>
         <ul class="eco-footprint-detail-content-ecoActions">
-          <li *ngFor="let ecoAction of ecoFootprint.ecoActions">
-            <span *ngIf="ecoAction"> {{ ecoAction.description }} </span> - <span *ngIf="ecoAction" class="eco-footprint-detail-content-ecoActions-co2e"> {{ ecoAction.co2e }} co2e </span>
+          <li *ngFor="let ecoAction of ecoActions">
+            <span *ngIf="ecoAction"> {{ ecoAction.description }} </span> - <span *ngIf="ecoAction" class="eco-footprint-detail-content-footprintinfo-ecoActions-co2e"> {{ ecoAction.co2e }} co2e </span>
           </li>
         </ul>
+        <app-eco-actions-bar [ecoActions]="ecoActions" [barStyle]="barStyle" [totalBar]="totalBar" [ticks]="ticks"></app-eco-actions-bar>
       </div>
     </div>
     <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>

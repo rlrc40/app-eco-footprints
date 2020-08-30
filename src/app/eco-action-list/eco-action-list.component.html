@@ -38,19 +38,7 @@
       </mat-selection-list>
     </div>
 
-    <div class="eco-action-list-chart-box">
-      <div class="eco-action-list-chart-box-bar">
-        <h4 class="eco-action-list-chart-box-bar-title">Carbon footprint, Spanish average, in tons of co2e</h4>
-        <div class="eco-action-list-chart-box-bar-total">{{totalBar}}</div>
-        <ul class="eco-action-list-chart-box-bar-ticks">
-          <li class="eco-action-list-chart-box-bar-ticks-tick" *ngFor="let tick of ticks">
-            {{tick}}
-          </li>
-        </ul>
-        <div class="eco-action-list-chart-box-bar_fill" [ngStyle]="{'width.%': getWithBar(getSumCo2e(selectedEcoActions))}"></div>
-      </div>
-      <app-eco-action-list-information [ecoActions]="getCurrentEcoActions(selectedEcoActions)" class="eco-action-list-information"></app-eco-action-list-information>
-    </div>
+    <app-eco-actions-bar [ecoActions]="getCurrentEcoActions(selectedEcoActions)" [barStyle]="getCurrentBarStyle(getCurrentEcoActions(selectedEcoActions))" [totalBar]="totalBar" [ticks]="ticks"></app-eco-actions-bar>
 
   </div>
 

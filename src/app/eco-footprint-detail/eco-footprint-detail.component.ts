@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { EcoFootprintService } from '../service/EcoFootprint.service';
 import { ActivatedRoute } from '@angular/router';
-import { EcoFootprint } from '../models/EcoFootprint';
 import { Location } from '@angular/common';
-import { ImageService } from '../service/Image.service';
 import { DomSanitizer } from '@angular/platform-browser';
+
+import { EcoFootprintService } from '../service/EcoFootprint.service';
+import { EcoFootprint } from '../models/EcoFootprint';
+import { ImageService } from '../service/Image.service';
+import { getBarStyle } from '../eco-action-list/eco-actions-bar/utils';
 
 @Component({
   selector: 'app-eco-footprint-detail',
@@ -15,6 +17,9 @@ export class EcoFootprintDetailComponent implements OnInit {
   ecoFootprint: EcoFootprint;
   isLoading: Boolean = true;
   photoURL;
+  totalBar: number = 7.4;
+  ticks: number[] = [0, 1, 2, 3, 4, 5, 6];
+  barStyle: object;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +45,7 @@ export class EcoFootprintDetailComponent implements OnInit {
     this.ecoFootprintService.getById(id)
       .subscribe(footprint => {
         this.ecoFootprint = footprint;
+        this.barStyle = getBarStyle(footprint.ecoActions, this.totalBar);
         if (this.ecoFootprint.photo && this.ecoFootprint.photo !== '') {
           this.imageService.findById(this.ecoFootprint.photo)
             .subscribe(image => {
@@ -51,6 +57,10 @@ export class EcoFootprintDetailComponent implements OnInit {
           this.isLoading = false;
         }, 1000);
       });
+  }
+
+  get ecoActions() {
+    return this.ecoFootprint.ecoActions;
   }
 
 }
