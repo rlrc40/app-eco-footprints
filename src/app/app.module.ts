@@ -1,60 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { EcoFootprintModule } from './eco-footprint.module';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatListModule } from '@angular/material/list';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatCardModule } from '@angular/material/card';
-
-import { EcoActionListComponent } from './eco-action-list/eco-action-list.component';
-import { EcoActionsBarComponent } from './eco-action-list/eco-actions-bar/eco-actions-bar.component';
-import { EcoFootprintFormComponent } from './eco-footprint-form/eco-footprint-form.component';
-import { EcoFootprintListComponent } from './eco-footprint-list/eco-footprint-list.component';
-import { EcoActionListInformationComponent } from './eco-action-list-information/eco-action-list-information.component';
-import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprint-detail.component';
 
 @NgModule({
    declarations: [
       AppComponent,
-      EcoActionListComponent,
-      EcoActionsBarComponent,
-      EcoFootprintFormComponent,
-      EcoFootprintListComponent,
-      EcoActionListInformationComponent,
-      EcoFootprintDetailComponent
    ],
    imports: [
+      EcoFootprintModule,
       BrowserModule,
-      BrowserAnimationsModule,
       AppRoutingModule,
       BrowserAnimationsModule,
-      MatTabsModule,
-      MatListModule,
-      MatInputModule,
-      MatButtonModule,
-      MatSelectModule,
-      MatStepperModule,
-      MatChipsModule,
-      MatCheckboxModule,
-      MatIconModule,
-      MatProgressSpinnerModule,
       HttpClientModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatCardModule
+      MatIconModule,
+      MatButtonModule,
    ],
    providers: [],
    bootstrap: [
