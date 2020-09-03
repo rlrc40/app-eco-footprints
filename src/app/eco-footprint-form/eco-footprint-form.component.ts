@@ -70,21 +70,26 @@ export class EcoFootprintFormComponent implements OnInit {
         ...this.firstFormGroup.value,
         ...this.ecoActionsGroup.value,
       };
-      if (this.validateEcoActions(this.ecoActions)) {
-        this.imageService.uploadImage(this.selectedFile.file).subscribe(
-          photoId => {
-            newEcoFootprint.photo = photoId;
-            this.ecoFootprintService.save(newEcoFootprint).subscribe(result => {
-              this.isLoading = false;
-              this.router.navigate(['/list', { }]);
-              this.snackBarService.openSnackBar('Eco footprint create', 'Success');
-            });
-          },
-          (err) => {
-            console.log(err);
-            this.snackBarService.openSnackBar('Eco footprint create', 'Error');
-        })
+      const submitEcoFootprint = () => {
+        this.ecoFootprintService.save(newEcoFootprint).subscribe(result => {
+          this.isLoading = false;
+          this.router.navigate(['/list', { }]);
+          this.snackBarService.openSnackBar('Eco footprint create', 'Success');
+        });
       }
+      if (this.validateEcoActions(this.ecoActions)) {
+        if (this.selectedFile && this.selectedFile.file)
+          this.imageService.uploadImage(this.selectedFile.file).subscribe(
+            photoId => {
+              newEcoFootprint.photo = photoId;
+              submitEcoFootprint();
+            },
+            (err) => {
+              console.log(err);
+              this.snackBarService.openSnackBar('Eco footprint create', 'Error');
+          })
+          else submitEcoFootprint();
+        }
   }
 
   processFile(imageInput: any) {
