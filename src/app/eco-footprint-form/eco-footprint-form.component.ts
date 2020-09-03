@@ -4,9 +4,8 @@ import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@ang
 
 import { EcoActionService } from '../service/EcoAction.service';
 import { EcoFootprintService } from '../service/EcoFootprint.service';
+import { SnackBarService } from '../service/SnackBar.service';
 import { ImageService } from '../service/Image.service';
-import { BehaviorSubject } from 'rxjs';
-import { EcoAction } from '../models/EcoAction';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -19,10 +18,10 @@ class ImageSnippet {
 })
 export class EcoFootprintFormComponent implements OnInit {
   @ViewChild('stepper') stepper;
-  ecoActionsField: BehaviorSubject<EcoAction[]>;
   firstFormGroup: FormGroup;
   ecoActionsGroup: FormGroup;
   selectedFile: ImageSnippet;
+  isLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -30,6 +29,7 @@ export class EcoFootprintFormComponent implements OnInit {
     private ecoActionService: EcoActionService,
     private ecoFootprintService: EcoFootprintService,
     private imageService: ImageService,
+    private snackBarService: SnackBarService,
   ) { }
 
   ngOnInit() {
@@ -65,25 +65,24 @@ export class EcoFootprintFormComponent implements OnInit {
   }
 
   submit(){
-      console.log(this.firstFormGroup.value);
-      console.log(this.ecoActionsGroup.value);
+      this.isLoading = true;
       const newEcoFootprint = {
         ...this.firstFormGroup.value,
         ...this.ecoActionsGroup.value,
       };
       if (this.validateEcoActions(this.ecoActions)) {
-
-
         this.imageService.uploadImage(this.selectedFile.file).subscribe(
           photoId => {
             newEcoFootprint.photo = photoId;
             this.ecoFootprintService.save(newEcoFootprint).subscribe(result => {
+              this.isLoading = false;
               this.router.navigate(['/list', { }]);
-              console.log(result)
+              this.snackBarService.openSnackBar('Eco footprint create', 'Success');
             });
           },
           (err) => {
             console.log(err);
+            this.snackBarService.openSnackBar('Eco footprint create', 'Error');
         })
       }
   }
