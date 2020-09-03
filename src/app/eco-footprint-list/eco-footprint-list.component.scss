@@ -7,15 +7,8 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-column-gap: 20px;
   grid-row-gap: 40px;
-  &-item {
-    margin: 15px;
-    padding: 20px;
-    padding-top: 50px;
-    border: 2px solid lightgreen;
-    border-radius: 10px;
-    position: relative;
-    cursor: pointer;
-    &:hover .eco-footprint-list-item-delete {
+  &-card {
+    &:hover .eco-footprint-list-card-delete {
       display: block;
     }
     &-delete {

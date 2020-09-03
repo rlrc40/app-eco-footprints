@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { EcoFootprintFormComponent } from './eco-footprint-form/eco-footprint-form.component';
 import { EcoFootprintListComponent } from './eco-footprint-list/eco-footprint-list.component';
@@ -32,6 +33,7 @@ import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprin
     MatCheckboxModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
