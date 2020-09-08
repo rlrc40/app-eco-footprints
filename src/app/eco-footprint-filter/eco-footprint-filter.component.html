@@ -1,0 +1,98 @@
+
+<mat-expansion-panel [expanded]="opened" (opened)="setOpenedFilterPanel()">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Advance filter
+    </mat-panel-title>
+    <mat-panel-description>
+      <div class="eco-footprint-filter-chips">
+        <mat-chip-list aria-label="Filters">
+          <mat-chip *ngFor="let filter of filters" >
+            {{filter}}
+          </mat-chip>
+          <mat-chip *ngIf="filters.length" selected (removed)="resetFilterForm()" [color]="warn">
+            Clean filters
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <form [formGroup]="filterForm" (ngSubmit)="filterHandler()">
+    <div class="eco-footprint-filter-row">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" autocomplete="off">
+        <mat-error *ngIf="name.invalid && name.touched">
+          Name too long...
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" autocomplete="off">
+        <mat-error *ngIf="name.invalid && name.touched">
+          Description too long...
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="eco-footprint-filter-row">
+      <mat-form-field>
+        <mat-label>Numer of Eco actions</mat-label>
+        <input matInput formControlName="ecoActionsCount" type="number" min="1" autocomplete="off">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Total co2e reduced</mat-label>
+        <input matInput formControlName="totalCo2e" type="number" min="0" max="8" autocomplete="off">
+      </mat-form-field>
+    </div>
+
+    <div class="eco-footprint-filter-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Transport Eco Actions</mat-label>
+        <mat-select [formControl]="transportActions" multiple>
+          <mat-select-trigger>
+            {{transportActions.value?.length ? transportActions.value[0].description : ''}}
+            <span *ngIf="transportActions.value?.length > 1" class="example-additional-selection">
+              (+{{transportActions.value.length - 1}} {{transportActions.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let ecoAction of ecoActionsTransport" [value]="ecoAction">{{ ecoAction.description }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Feeding Eco Actions</mat-label>
+        <mat-select [formControl]="feedingActions" multiple>
+          <mat-select-trigger>
+            {{feedingActions.value?.length ? feedingActions.value[0].description : ''}}
+            <span *ngIf="feedingActions.value?.length > 1" class="example-additional-selection">
+              (+{{feedingActions.value.length - 1}} {{feedingActions.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let ecoAction of ecoActionsFeeding" [value]="ecoAction">{{ ecoAction.description }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Energy Eco Actions</mat-label>
+        <mat-select [formControl]="energyActions" multiple>
+          <mat-select-trigger>
+            {{energyActions.value?.length ? energyActions.value[0].description : ''}}
+            <span *ngIf="energyActions.value?.length > 1" class="example-additional-selection">
+              (+{{energyActions.value.length - 1}} {{energyActions.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let ecoAction of ecoActionsEnergy" [value]="ecoAction">{{ ecoAction.description }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="eco-footprint-filter-row">
+      <button mat-stroked-button [disabled]="filterForm.invalid" color="primary">Filter </button>
+    </div>
+  </form>
+
+</mat-expansion-panel>

@@ -1,20 +1,26 @@
+<app-eco-footprint-filter></app-eco-footprint-filter>
 <div class="eco-footprint-box-loading">
   <div class="eco-footprint-list" *ngIf="!isLoading">
-      <mat-card class="eco-footprint-list-card" *ngFor="let ecoFootprint of ecoFootprints" routerLink="/{{ecoFootprint.id}}">
-        <mat-card-header>
-          <div mat-card-avatar class="eco-footprint-list-card-header-image"></div>
-          <mat-card-title>{{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}</mat-card-title>
-          <mat-card-subtitle class="eco-footprint-list-card-header-description">{{ ecoFootprint.description }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <app-eco-action-list-information [ecoActions]="ecoFootprint.ecoActions" class="eco-action-list-information"></app-eco-action-list-information>
-        </mat-card-content>
-        <mat-card-actions>
-          <button class="eco-footprint-list-card-delete" mat-icon-button color="warn" aria-label="Delete eco footprint" (click)="deleteEcoFootprint(ecoFootprint.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-card-actions>
-      </mat-card>
+    <mat-card class="eco-footprint-list-card" *ngFor="let ecoFootprint of ecoFootprints" routerLink="/{{ecoFootprint.id}}">
+      <div class="eco-footprint-list-card-actions">
+      <ul>
+        <li *ngFor="let ecoAction of ecoFootprint.ecoActions"> {{ ecoAction.description }} </li>
+      </ul>
+      </div>
+      <mat-card-header>
+        <div mat-card-avatar class="eco-footprint-list-card-header-image"></div>
+        <mat-card-title>{{ ecoFootprint.firstName }} {{ ecoFootprint.lastName }}</mat-card-title>
+        <mat-card-subtitle class="eco-footprint-list-card-header-description">{{ ecoFootprint.description }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <app-eco-action-list-information [ecoActions]="ecoFootprint.ecoActions" class="eco-action-list-information"></app-eco-action-list-information>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="eco-footprint-list-card-delete" mat-icon-button color="warn" aria-label="Delete eco footprint" (click)="deleteEcoFootprint(ecoFootprint.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
   <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
 </div>

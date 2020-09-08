@@ -6,5 +6,6 @@ export interface EcoFootprint {
   id: string,
   firstName: string,
   lastName: string,
+  description: string,
   ecoActions: Array<EcoAction>
 }
