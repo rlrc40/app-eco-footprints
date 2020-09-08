@@ -1,6 +1,6 @@
 <div class="eco-footprint-detail">
   <div class="eco-footprint-box-loading">
-    <div *ngIf="!isLoading && ecoFootprint" class="eco-footprint-detail-content">
+    <div *ngIf="!isLoading && ecoFootprint && photoURL" class="eco-footprint-detail-content">
       <!-- <a routerLink="/list" class="eco-footprint-detail-content-back">
         <button mat-raised-button color="warn" aria-label="Back to list">
           <mat-icon>arrow_back</mat-icon> Back
@@ -15,7 +15,7 @@
           <br/>
           {{ ecoFootprint.description }}
         </div>
-        <img mat-card-image class="eco-footprint-detail-content-userinfo-image" *ngIf="ecoFootprint.photo" [src]="photoURL" alt="Profile photo">
+        <img mat-card-image class="eco-footprint-detail-content-userinfo-image" *ngIf="ecoFootprint.photo && photoURL" [src]="photoURL" alt="Profile photo">
       </div>
       <div *ngIf="ecoActions && ecoActions.length > 0" class="eco-footprint-detail-content-footprintinfo">
         <h2>ECO Actions </h2>
@@ -27,5 +27,5 @@
         <app-eco-actions-bar [ecoActions]="ecoActions" [barStyle]="barStyle" [totalBar]="totalBar" [ticks]="ticks"></app-eco-actions-bar>
       </div>
     </div>
-    <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+    <mat-spinner [diameter]="50" *ngIf="isLoading || !ecoFootprint || !photoURL"></mat-spinner>
   </div>
