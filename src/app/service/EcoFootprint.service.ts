@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { EcoFootprint } from '../models/EcoFootprint';
 
@@ -11,9 +11,28 @@ import { EcoFootprint } from '../models/EcoFootprint';
 })
 export class EcoFootprintService {
 
-  private ecoFootprintsUrl = `https://eco-footprint-api.herokuapp.com//eco-footprints`;
+  private ecoFootprintsUrl = `https://eco-footprint-api.herokuapp.com/eco-footprints`;
+  private _ecoFootprints = new BehaviorSubject<EcoFootprint[]>([]);
+  private _ecoFootprintsFilter = new BehaviorSubject<EcoFootprint[]>([]);
 
   constructor(private http: HttpClient) { }
+
+  getEcoFootprints(): Observable<any> {
+    return this._ecoFootprints.asObservable();
+  }
+
+  setEcoFootprints(footprints: EcoFootprint[]) {
+    this._ecoFootprints.next(footprints);
+    this._ecoFootprintsFilter.next(footprints);
+  }
+
+  getEcoFootprintsFilter(): Observable<any> {
+    return this._ecoFootprintsFilter.asObservable();
+  }
+
+  setEcoFootprintsFilter(footprints: EcoFootprint[]) {
+    this._ecoFootprintsFilter.next(footprints);
+  }
 
   public findAll(): Observable<EcoFootprint[]> {
     return this.http.get<EcoFootprint[]>(`${this.ecoFootprintsUrl}/list`);
@@ -26,6 +45,9 @@ export class EcoFootprintService {
       catchError(this.handleError<EcoFootprint>(`getFootprint id=${id}`))
     );
   }
+
+  public filterEcoFootprint
+
 
   public save(ecoFootprint: EcoFootprint) {
     return this.http.post<EcoFootprint>(this.ecoFootprintsUrl, ecoFootprint);

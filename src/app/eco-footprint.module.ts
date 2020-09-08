@@ -15,10 +15,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { EcoFootprintFormComponent } from './eco-footprint-form/eco-footprint-form.component';
 import { EcoFootprintListComponent } from './eco-footprint-list/eco-footprint-list.component';
 import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprint-detail.component';
+import { EcoFootprintFilterComponent } from './eco-footprint-filter/eco-footprint-filter.component';
 
 @NgModule({
   imports: [
@@ -34,6 +38,9 @@ import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprin
     MatProgressSpinnerModule,
     MatCardModule,
     MatSnackBarModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -42,6 +49,7 @@ import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprin
     EcoFootprintFormComponent,
     EcoFootprintListComponent,
     EcoFootprintDetailComponent,
+    EcoFootprintFilterComponent,
   ]
 })
 export class EcoFootprintModule { }

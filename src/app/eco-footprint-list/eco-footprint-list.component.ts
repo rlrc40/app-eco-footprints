@@ -5,6 +5,7 @@ import { ImageService } from '../service/Image.service';
 import { SnackBarService } from '../service/SnackBar.service';
 import { EcoFootprint } from '../models/EcoFootprint';
 import { DomSanitizer } from '@angular/platform-browser';
+import { EcoFootprintModule } from '../eco-footprint.module';
 
 @Component({
   selector: 'app-eco-footprint-list',
@@ -25,14 +26,15 @@ export class EcoFootprintListComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.getEcoFootprints();
+      this.loadEcoFootprints();
+      this.ecoFootprintService.getEcoFootprintsFilter().subscribe( data => this.ecoFootprints = data );
       this.isLoading = false;
     }, 1000);
   }
 
-  getEcoFootprints(): void {
+  loadEcoFootprints(): void {
     this.ecoFootprintService.findAll()
-      .subscribe(ecoFootprints => this.ecoFootprints = ecoFootprints.reverse());
+      .subscribe(ecoFootprints => this.ecoFootprintService.setEcoFootprints(ecoFootprints.reverse()));
   }
 
   deleteEcoFootprint(ecoFootprintId: string): void {

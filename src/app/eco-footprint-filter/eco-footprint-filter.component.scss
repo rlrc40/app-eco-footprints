@@ -1,0 +1,22 @@
+.eco-footprint-filter {
+  &-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-column-gap: 30px;
+    justify-content: space-evenly;
+    &:last-child {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+.mat-expansion-panel-header {
+  height: auto;
+  min-height: 42px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.mat-standard-chip {
+  padding: 4px 8px;
+  min-height: 22px
+}
