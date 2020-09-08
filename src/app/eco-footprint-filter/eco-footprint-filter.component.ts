@@ -82,10 +82,10 @@ export class EcoFootprintFilterComponent implements OnInit {
   }
 
   setFilters(): void {
-    if (this.name.value) this.filters.push(this.name.value);
-    if (this.description.value) this.filters.push(this.description.value);
-    if (this.ecoActionsCount.value) this.filters.push(this.ecoActionsCount.value);
-    if (this.totalCo2e.value) this.filters.push(this.totalCo2e.value);
+    if (this.name.value) this.filters.push(`Name: ${this.name.value}`);
+    if (this.description.value) this.filters.push(`Description: ${this.description.value}`);
+    if (this.ecoActionsCount.value) this.filters.push(`Eco actions: ${this.ecoActionsCount.value}`);
+    if (this.totalCo2e.value) this.filters.push(`Co2e: ${this.totalCo2e.value}`);
 
     if (this.transportActions?.value?.length) this.filters = [...this.filters, ...this.transportActions.value.map(({description}) => description)];
     if (this.feedingActions?.value?.length) this.filters = [...this.filters, ...this.feedingActions.value.map(({description}) => description)];
@@ -103,7 +103,7 @@ export class EcoFootprintFilterComponent implements OnInit {
       ecoFootprintsFiltered = ecoFootprintsFiltered.filter( ({ description }) => description.toLowerCase().includes(this.description.value.toLowerCase()) );
     }
     if (this.ecoActionsCount.value) {
-      ecoFootprintsFiltered = ecoFootprintsFiltered.filter( ({ ecoActions }) => ecoActions.length >= this.ecoActionsCount.value );
+      ecoFootprintsFiltered = ecoFootprintsFiltered.filter( ({ ecoActions }) => ecoActions.length == this.ecoActionsCount.value );
     }
     if (this.totalCo2e.value) {
       ecoFootprintsFiltered = ecoFootprintsFiltered.filter( ({ ecoActions }) => {
