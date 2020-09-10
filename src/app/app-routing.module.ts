@@ -4,8 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { EcoFootprintFormComponent } from './eco-footprint-form/eco-footprint-form.component';
 import { EcoFootprintListComponent } from './eco-footprint-list/eco-footprint-list.component';
 import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprint-detail.component';
+import { EcoFootprintInformationComponent } from './eco-footprint-information/eco-footprint-information.component';
 
 const routes: Routes = [
+  { path: '', component: EcoFootprintInformationComponent },
   { path: 'new', component: EcoFootprintFormComponent },
   { path: 'list', component: EcoFootprintListComponent },
   { path: 'list', component: EcoFootprintListComponent },
