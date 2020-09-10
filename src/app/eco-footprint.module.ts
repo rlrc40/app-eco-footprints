@@ -23,6 +23,7 @@ import { EcoFootprintFormComponent } from './eco-footprint-form/eco-footprint-fo
 import { EcoFootprintListComponent } from './eco-footprint-list/eco-footprint-list.component';
 import { EcoFootprintDetailComponent } from './eco-footprint-detail/eco-footprint-detail.component';
 import { EcoFootprintFilterComponent } from './eco-footprint-filter/eco-footprint-filter.component';
+import { EcoFootprintInformationComponent } from './eco-footprint-information/eco-footprint-information.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { EcoFootprintFilterComponent } from './eco-footprint-filter/eco-footprin
     EcoFootprintListComponent,
     EcoFootprintDetailComponent,
     EcoFootprintFilterComponent,
+    EcoFootprintInformationComponent
   ]
 })
 export class EcoFootprintModule { }

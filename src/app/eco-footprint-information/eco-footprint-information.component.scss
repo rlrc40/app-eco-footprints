@@ -1,0 +1,19 @@
+.eco-footprint-information {
+  padding: 0px 10%;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 40px;
+  text-align: justify;
+  @media only screen and (max-width: 800px) {
+    font-size: 20px;
+    line-height: 36px;
+  }
+  a {
+    color: #ff4081;
+  }
+  &-image {
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
+}
