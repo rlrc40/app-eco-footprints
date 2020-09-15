@@ -26,11 +26,11 @@ export class EcoActionListInformationComponent implements OnInit {
   getSumCo2e(ecoActions): Number {
     const getSum = (total, value) => total + value;
 
-    return ecoActions.length && ecoActions.map( action => action.co2e || 0 ).reduce(getSum) || 0;
+    return ecoActions && ecoActions.length && ecoActions.map( action => action.co2e || 0 ).reduce(getSum) || 0;
   }
 
   getNumberOfSelectedActions(ecoActions): Number {
-    return ecoActions.length;
+    return ecoActions && ecoActions.length;
   }
 
 }

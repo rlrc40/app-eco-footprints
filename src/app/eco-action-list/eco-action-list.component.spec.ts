@@ -2,6 +2,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { EcoActionListComponent } from './eco-action-list.component';
 
@@ -11,6 +13,7 @@ describe('EcoActionListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, MatSnackBarModule],
       declarations: [ EcoActionListComponent ]
     })
     .compileComponents();
