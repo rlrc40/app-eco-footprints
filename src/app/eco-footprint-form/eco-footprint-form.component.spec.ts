@@ -2,6 +2,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { EcoFootprintFormComponent } from './eco-footprint-form.component';
 
@@ -11,7 +15,9 @@ describe('EcoFootprintFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EcoFootprintFormComponent ]
+      imports: [ HttpClientTestingModule, RouterTestingModule, MatSnackBarModule ],
+      declarations: [ EcoFootprintFormComponent ],
+      providers: [ FormBuilder ],
     })
     .compileComponents();
   }));

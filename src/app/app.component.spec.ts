@@ -20,16 +20,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'eco-footprints-webapp'`, () => {
+  it(`should have as title 'Reduce your Ecological Footprint'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('eco-footprints-webapp');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('eco-footprints-webapp app is running!');
+    expect(app.title).toEqual('Reduce your Ecological Footprint');
   });
 });

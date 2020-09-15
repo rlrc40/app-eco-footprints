@@ -11,7 +11,7 @@ import { getBarStyle } from '../eco-action-list/eco-actions-bar/utils';
 @Component({
   selector: 'app-eco-footprint-detail',
   templateUrl: './eco-footprint-detail.component.html',
-  styleUrls: ['./eco-footprint-detail.component.scss']
+  styleUrls: ['./eco-footprint-detail.component.scss'],
 })
 export class EcoFootprintDetailComponent implements OnInit {
   ecoFootprint: EcoFootprint;

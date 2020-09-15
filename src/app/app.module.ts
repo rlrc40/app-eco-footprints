@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 import { EcoFootprintModule } from './eco-footprint.module';
 
@@ -17,13 +18,14 @@ import { AppComponent } from './app.component';
       AppComponent,
    ],
    imports: [
+      HttpClientModule,
       EcoFootprintModule,
       BrowserModule,
       AppRoutingModule,
       BrowserAnimationsModule,
-      HttpClientModule,
       MatIconModule,
       MatButtonModule,
+      RouterModule.forRoot([]),
    ],
    providers: [],
    bootstrap: [

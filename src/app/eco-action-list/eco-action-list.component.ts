@@ -28,13 +28,13 @@ export class EcoActionListComponent implements OnInit {
   }
 
   getCurrentEcoActions(ecoActions) {
-    return ecoActions.selectedOptions.selected.map(action => action.value);
+    return ecoActions.selectedOptions?.selected.map(action => action.value) || [];
   }
 
   getSumCo2e(ecoActions): Number {
     const getSum = (total, value) => total + value;
 
-    const list = ecoActions.selectedOptions.selected;
+    const list = ecoActions.selectedOptions?.selected || [];
     return list.length && list.map( action => action.value.co2e ).reduce(getSum) || 0;
   }
 
