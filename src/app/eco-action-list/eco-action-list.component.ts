@@ -44,7 +44,7 @@ export class EcoActionListComponent implements OnInit {
 
   getCo2eColor(ecoActions, ecoActionId: String): String {
     const selectedIds = ecoActions?.selectedOptions?.selected?.map( action => action.value.id );
-    return selectedIds.indexOf(ecoActionId) !== -1 ? '#ff4081' : '#d9d9d9';
+    return selectedIds?.indexOf(ecoActionId) !== -1 ? '#ff4081' : '#d9d9d9';
   }
 
   getCurrentBarStyle(ecoActions: EcoAction[]): object {
