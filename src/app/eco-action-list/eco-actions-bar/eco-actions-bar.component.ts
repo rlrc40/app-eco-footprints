@@ -8,7 +8,6 @@ import { EcoAction } from '../../models/EcoAction';
 })
 export class EcoActionsBarComponent implements OnInit {
   @Input() ecoActions: EcoAction[];
-  @Input() widthBar: string;
   @Input() totalBar: number;
   @Input() ticks: number[];
   @Input() barStyle: string;
