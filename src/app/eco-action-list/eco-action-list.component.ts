@@ -13,6 +13,7 @@ import { getBarStyle } from '../eco-action-list/eco-actions-bar/utils';
 })
 export class EcoActionListComponent implements OnInit {
   ecoActions: EcoAction[] = [];
+  ecoActionsTypes: object[] = [{ label: 'Transporte', id: 1 }, { label: 'Alimentación', id: 2 }, { label: 'Energía', id: 3 }]
   totalBar: number = 7.4;
   ticks: number[] = [0, 1, 2, 3, 4, 5, 6];
 
@@ -42,9 +43,9 @@ export class EcoActionListComponent implements OnInit {
     return (100 - (co2e * 100) / this.totalBar);
   }
 
-  getCo2eColor(ecoActions, ecoActionId: String): String {
+  isSelected(ecoActions, ecoActionId: String): Boolean {
     const selectedIds = ecoActions?.selectedOptions?.selected?.map( action => action.value.id );
-    return selectedIds.indexOf(ecoActionId) !== -1 ? '#ff4081' : '#d9d9d9';
+    return selectedIds?.indexOf(ecoActionId) !== -1;
   }
 
   getCurrentBarStyle(ecoActions: EcoAction[]): object {

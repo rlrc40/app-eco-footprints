@@ -5,35 +5,20 @@
     <div class="eco-action-list-chart-options">
       <mat-selection-list #selectedEcoActions (selectionChange)="onChange('transport', selectedEcoActions.selectedOptions.selected)">
         <mat-tab-group mat-align-tabs="start">
-          <mat-tab label="Transporte">
+          <div *ngFor="let type of ecoActionsTypes">
+            <mat-tab [label]="type.label">
               <div *ngFor="let ecoAction of ecoActions">
-                <mat-list-option *ngIf="ecoAction.categoryType === 1" [value]="ecoAction">
+                <mat-list-option *ngIf="ecoAction.categoryType === type.id" [value]="ecoAction">
                   <div class="eco-action-list-chart-options-option" >
-                    <span class="eco-action-list-chart-options-option-co2e" [ngStyle]="{'color': getCo2eColor(selectedEcoActions, ecoAction.id)}">{{ecoAction.co2e}} co2e</span> {{ecoAction.description}}
+                    <span
+                      class="eco-action-list-chart-options-option-co2e"
+                      co2eColor [defaultColor]="'#d9d9d9'" [highLightColor]="'#ff4081'" [isHighLighted]="isSelected(selectedEcoActions, ecoAction.id)"
+                    >{{ecoAction.co2e}} co2e</span> {{ecoAction.description}}
                   </div>
                 </mat-list-option>
               </div>
-          </mat-tab>
-
-          <mat-tab label="Alimentación">
-              <div *ngFor="let ecoAction of ecoActions">
-                <mat-list-option *ngIf="ecoAction.categoryType === 2" [value]="ecoAction">
-                  <div class="eco-action-list-chart-options-option" >
-                    <span class="eco-action-list-chart-options-option-co2e" [ngStyle]="{'color': getCo2eColor(selectedEcoActions, ecoAction.id)}">{{ecoAction.co2e}} co2e</span> {{ecoAction.description}}
-                  </div>
-                </mat-list-option>
-              </div>
-          </mat-tab>
-
-          <mat-tab label="Energía">
-              <div *ngFor="let ecoAction of ecoActions">
-                <mat-list-option *ngIf="ecoAction.categoryType === 3" [value]="ecoAction">
-                  <div class="eco-action-list-chart-options-option" >
-                    <span class="eco-action-list-chart-options-option-co2e" [ngStyle]="{'color': getCo2eColor(selectedEcoActions, ecoAction.id)}">{{ecoAction.co2e}} co2e</span> {{ecoAction.description}}
-                  </div>
-                </mat-list-option>
-              </div>
-          </mat-tab>
+            </mat-tab>
+          </div>
         </mat-tab-group>
       </mat-selection-list>
     </div>
