@@ -5,6 +5,8 @@ import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@ang
 import { EcoActionService } from '../service/EcoAction.service';
 import { EcoFootprintService } from '../service/EcoFootprint.service';
 import { ImageService } from '../service/Image.service';
+import { CanDeactivateGuardService } from '../service/can-deactivate-guard.service';
+import { Observable } from 'rxjs';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -15,7 +17,7 @@ class ImageSnippet {
   templateUrl: './eco-footprint-form.component.html',
   styleUrls: ['./eco-footprint-form.component.scss']
 })
-export class EcoFootprintFormComponent implements OnInit {
+export class EcoFootprintFormComponent implements OnInit, CanDeactivateGuardService {
   @ViewChild('stepper') stepper;
   firstFormGroup: FormGroup;
   ecoActionsGroup: FormGroup;
@@ -56,6 +58,14 @@ export class EcoFootprintFormComponent implements OnInit {
         this.ecoActions.push(new FormControl(ecoAction, Validators.required));
       }
     });
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.firstFormGroup.dirty || this.ecoActionsGroup.dirty) {
+      return confirm('Do you want to discard the changes?');
+    } else {
+      return true;
+    }
   }
 
   validateEcoActions(arr: FormArray): Boolean {
