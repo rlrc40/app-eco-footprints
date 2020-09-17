@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { catchError, tap, retry } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { EcoFootprint } from '../models/EcoFootprint';
+
+import { SnackBarService } from './SnackBar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,8 @@ export class EcoFootprintService {
   private _ecoFootprints = new BehaviorSubject<EcoFootprint[]>([]);
   private _ecoFootprintsFilter = new BehaviorSubject<EcoFootprint[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private snackBarService: SnackBarService) { }
 
   getEcoFootprints(): Observable<any> {
     return this._ecoFootprints.asObservable();
@@ -50,11 +53,29 @@ export class EcoFootprintService {
 
 
   public save(ecoFootprint: EcoFootprint) {
-    return this.http.post<EcoFootprint>(this.ecoFootprintsUrl, ecoFootprint);
+    const http$ = this.http.post<EcoFootprint>(this.ecoFootprintsUrl, ecoFootprint);
+    http$.pipe(
+      retry(2),
+      catchError(err => of([]))
+    ).subscribe(
+      res => this.snackBarService.openSnackBar('Eco footprint create', 'Success'),
+      err => this.snackBarService.openSnackBar('Eco footprint create', 'Error'),
+      () => console.log('HTTP request Eco footprint create completed.')
+    );
+    return http$;
   }
 
   public delete(ecoFootprintId: string) {
-    return this.http.delete(`${this.ecoFootprintsUrl}/${ecoFootprintId}`, {responseType: 'text'});
+    const http$ = this.http.delete(`${this.ecoFootprintsUrl}/${ecoFootprintId}`, {responseType: 'text'});
+    http$.pipe(
+      retry(2),
+      catchError(err => of([]))
+    ).subscribe(
+      res => this.snackBarService.openSnackBar('Eco footprint delete', 'Success'),
+      err => this.snackBarService.openSnackBar('Eco footprint delete', 'Error'),
+      () => console.log('HTTP request Eco footprint delete completed.')
+    );
+    return http$;
   }
 
   /** Log a FootprintService message with the MessageService */

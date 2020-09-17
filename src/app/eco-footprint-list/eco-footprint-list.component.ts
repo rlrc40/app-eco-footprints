@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EcoFootprintService } from '../service/EcoFootprint.service';
-import { ImageService } from '../service/Image.service';
-import { SnackBarService } from '../service/SnackBar.service';
 import { EcoFootprint } from '../models/EcoFootprint';
-import { DomSanitizer } from '@angular/platform-browser';
-import { EcoFootprintModule } from '../eco-footprint.module';
 
 @Component({
   selector: 'app-eco-footprint-list',
@@ -17,12 +13,7 @@ export class EcoFootprintListComponent implements OnInit {
   ecoFootprintsImages: string[] = [];
   isLoading: Boolean = true;
 
-  constructor(
-    private ecoFootprintService: EcoFootprintService,
-    private imageService: ImageService,
-    private sanitizer: DomSanitizer,
-    private snackBarService: SnackBarService,
-  ) { }
+  constructor( private ecoFootprintService: EcoFootprintService ) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -44,7 +35,6 @@ export class EcoFootprintListComponent implements OnInit {
         this.ecoFootprints = this.ecoFootprints.filter(footprint => footprint.id !== ecoFootprintId);
         setTimeout(() => {
           this.isLoading = false;
-          this.snackBarService.openSnackBar('Eco footprint delete', 'Success');
         }, 1000);
       });
 

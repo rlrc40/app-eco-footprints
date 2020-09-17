@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { EcoAction } from '../models/EcoAction';
 
+// Hacemos el servicio injectable por si le queremos inkectar algun otro servicio
 @Injectable({
   providedIn: 'root'
 })
