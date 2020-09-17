@@ -4,7 +4,6 @@ import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@ang
 
 import { EcoActionService } from '../service/EcoAction.service';
 import { EcoFootprintService } from '../service/EcoFootprint.service';
-import { SnackBarService } from '../service/SnackBar.service';
 import { ImageService } from '../service/Image.service';
 
 class ImageSnippet {
@@ -29,7 +28,6 @@ export class EcoFootprintFormComponent implements OnInit {
     private ecoActionService: EcoActionService,
     private ecoFootprintService: EcoFootprintService,
     private imageService: ImageService,
-    private snackBarService: SnackBarService,
   ) { }
 
   ngOnInit() {
@@ -74,7 +72,6 @@ export class EcoFootprintFormComponent implements OnInit {
         this.ecoFootprintService.save(newEcoFootprint).subscribe(result => {
           this.isLoading = false;
           this.router.navigate(['/list', { }]);
-          this.snackBarService.openSnackBar('Eco footprint create', 'Success');
         });
       }
       if (this.validateEcoActions(this.ecoActions)) {
@@ -83,11 +80,7 @@ export class EcoFootprintFormComponent implements OnInit {
             photoId => {
               newEcoFootprint.photo = photoId;
               submitEcoFootprint();
-            },
-            (err) => {
-              console.log(err);
-              this.snackBarService.openSnackBar('Eco footprint create', 'Error');
-          })
+            })
           else submitEcoFootprint();
         }
   }
