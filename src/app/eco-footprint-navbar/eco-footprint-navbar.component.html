@@ -1,0 +1,22 @@
+<nav class="eco-footprint-nav">
+  <a routerLink="/login" *ngIf="!loggedIn">
+    <button mat-raised-button color="accent" aria-label="Login">
+      Login <mat-icon>login</mat-icon>
+    </button>
+  </a>
+  <a routerLink="/new" *ngIf="loggedIn">
+    <button mat-raised-button color="accent" aria-label="New eco footprint">
+      New ECO Footprint <mat-icon>fingerprint</mat-icon>
+    </button>
+  </a>
+  <a routerLink="/list" *ngIf="loggedIn">
+    <button mat-raised-button color="accent" aria-label="Eco footprint list">
+      ECO Footprint list <mat-icon>list </mat-icon>
+    </button>
+  </a>
+  <a routerLink="/" *ngIf="loggedIn">
+    <button mat-raised-button color="accent" aria-label="Logout" (click)="handleLogout()">
+      Logout <mat-icon>logout</mat-icon>
+    </button>
+  </a>
+</nav>
