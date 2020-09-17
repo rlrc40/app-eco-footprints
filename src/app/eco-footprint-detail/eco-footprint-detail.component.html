@@ -1,11 +1,12 @@
+<div class="modal-overlay" id="modal-overlay"></div>
 <div class="eco-footprint-detail">
+  <a routerLink="/list" class="eco-footprint-detail-content-back">
+    <button mat-raised-button color="warn" aria-label="Back to list">
+      <mat-icon>arrow_back</mat-icon> Back
+    </button>
+  </a>
   <div class="eco-footprint-box-loading">
     <div *ngIf="!isLoading && ecoFootprint && (ecoFootprint.photo && photoURL || !ecoFootprint.photo)" class="eco-footprint-detail-content">
-      <!-- <a routerLink="/list" class="eco-footprint-detail-content-back">
-        <button mat-raised-button color="warn" aria-label="Back to list">
-          <mat-icon>arrow_back</mat-icon> Back
-        </button>
-      </a> -->
       <div class="eco-footprint-detail-content-userinfo">
         <div mat-card-avatar class="eco-footprint-detail-content-userinfo-avatar"></div>
         <div *ngIf="ecoFootprint.firstName" class="eco-footprint-detail-content-userinfo-name">

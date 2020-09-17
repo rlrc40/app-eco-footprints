@@ -1,7 +1,7 @@
 <app-eco-footprint-filter></app-eco-footprint-filter>
 <div class="eco-footprint-box-loading">
   <div class="eco-footprint-list" *ngIf="!isLoading">
-    <mat-card class="eco-footprint-list-card" *ngFor="let ecoFootprint of ecoFootprints" routerLink="/{{ecoFootprint.id}}">
+    <mat-card class="eco-footprint-list-card" *ngFor="let ecoFootprint of ecoFootprints" routerLink="{{ecoFootprint.id}}">
       <div class="eco-footprint-list-card-actions">
       <ul>
         <li *ngFor="let ecoAction of ecoFootprint.ecoActions"> {{ ecoAction.description }} </li>
@@ -23,4 +23,5 @@
     </mat-card>
   </div>
   <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+  <router-outlet></router-outlet>
 </div>

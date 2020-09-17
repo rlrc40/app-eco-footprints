@@ -42,11 +42,18 @@ export class EcoFootprintDetailComponent implements OnInit {
 
   getEcoFootprint(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    // Para recoger dinámicamente los parametros habria que utilizar el observable this.route.params en vez del snapshot
+    // Este código iría mejor en el ngOnInit y al ser un observable habría que matarlo en el ngOnDestroy
+    // this.route.params.subscribe(
+    //   (params: Params) => {
+    //     const id = params('id');
+    //   }
+    // );
     this.ecoFootprintService.getById(id)
       .subscribe(footprint => {
         this.ecoFootprint = footprint;
-        this.barStyle = getBarStyle(footprint.ecoActions, this.totalBar);
-        if (this.ecoFootprint.photo && this.ecoFootprint.photo !== '') {
+        this.barStyle = getBarStyle(footprint?.ecoActions, this.totalBar);
+        if (this.ecoFootprint?.photo) {
           this.imageService.findById(this.ecoFootprint.photo)
             .subscribe(image => {
               let unsafeImageUrl = URL.createObjectURL(image);
